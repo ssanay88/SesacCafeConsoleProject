@@ -1,0 +1,4 @@
+package mypage
+
+class MyPage {
+}
