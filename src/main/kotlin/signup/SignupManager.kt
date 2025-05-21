@@ -1,0 +1,4 @@
+package signup
+
+class SignupManager {
+}
