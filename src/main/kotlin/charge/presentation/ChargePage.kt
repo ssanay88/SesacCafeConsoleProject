@@ -24,9 +24,9 @@ class ChargePage {
             when {
                 amount == null -> println("숫자만 입력해주세요.")
 
-                amount <= 5000 -> println("최소 충전 금액은 5000원입니다.")
+                amount < 5000 -> println("최소 충전 금액은 5000원입니다.")
 
-                amount >= 50000 -> println("최대 충전 금액은 50000원입니다.")
+                amount > 50000 -> println("최대 충전 금액은 50000원입니다.")
 
                 else -> {
                     ChargeService.charge(
