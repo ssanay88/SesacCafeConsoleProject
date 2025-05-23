@@ -11,4 +11,5 @@ object Input {
         val input =getStringInput(text)
         return input.toIntOrNull()
     }
+
 }
