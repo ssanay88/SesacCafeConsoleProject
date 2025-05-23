@@ -9,6 +9,11 @@ fun printEnterIdIsTaken() = print("이미 사용중인 ID 입니다. 다른 ID�
 
 fun printEnterNewPwUI() = print("사용할 PW 입력 : ")
 
+fun printEnterNewNameUI() = print("회원님의 이름을 입력 : ")
+
 fun printEnterPwRepeatUI() = print("PW 확인을 위해 한번 더 입력해주세요 : ")
 
 fun printFailToCheckPwUI() = print("재입력하신 PW가 다릅니다. 재입력 부탁드립니다 : ")
+
+fun printSignupSuccessMessage() = println("회원 가입에 성공했습니다!")
+
