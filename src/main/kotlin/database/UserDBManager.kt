@@ -45,7 +45,7 @@ object UserDBManager {
     }
 
     // 새로운 유저 데이터를 DB에 추가하는 함수
-    fun addNewUser(newUser: UserData) {
+    fun registerNewUser(newUser: UserData) {
         val users = readAllUsers()
         users.add(newUser)
         updateUserDB(users)
