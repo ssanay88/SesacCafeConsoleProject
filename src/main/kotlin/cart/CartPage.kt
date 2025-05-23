@@ -1,11 +1,10 @@
 package cart
 
+import common.UserData
+import order.OrderPage.order
 import java.time.format.DateTimeFormatter
-import kotlin.collections.get
-import kotlin.text.clear
-import kotlin.text.format
 
-fun showCartPage(user: User) {
+fun showCartPage(user: UserData) {
     while(true) {
         println("\n=== [ 장바구니 ] ===")
         val cartItems = Cart.getItems()

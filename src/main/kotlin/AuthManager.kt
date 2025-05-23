@@ -1,6 +1,6 @@
-import common.Order
 import common.UserData
 import database.UserDBManager
+import order.Order
 
 /**
  * Auth manager

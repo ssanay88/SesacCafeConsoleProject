@@ -13,7 +13,7 @@ class ChangePasswordPage {
         val confirmPassword = inputConfirmPassword(newPassword) ?: return
 
         user.password = newPassword
-        println("✅ 비밀번호가 성공적으로 변경되었습니다.")
+        println("비밀번호가 성공적으로 변경되었습니다.")
     }
 
     private fun inputCurrentPassword(user: UserData): String? {

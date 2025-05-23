@@ -3,10 +3,11 @@ package menu
 import cart.Cart
 import cart.CartItem
 import cart.showCartPage
+import common.UserData
 import order.OrderPage
 import kotlin.collections.get
 
-fun showMenuPage(user: User) {
+fun showMenuPage(user: UserData) {
     println("\n=== [ 메뉴 페이지 ] ===")
     Menu.values().forEachIndexed { index, menu ->
         println("${index + 1}. ${menu.menuName} (${menu.price}원)")
