@@ -1,11 +1,12 @@
 package password.presentation
 
 import common.UserData
+import database.UserDBManager
 
 
 class ChangePasswordPage {
 
-    fun changePassword(user: UserData) {
+    fun startChangePasswordPage(user: UserData) {
         println("\n|||| 비밀번호 수정 페이지 ||||")
 
         val currentPassword = inputCurrentPassword(user) ?: return
@@ -13,6 +14,7 @@ class ChangePasswordPage {
         val confirmPassword = inputConfirmPassword(newPassword) ?: return
 
         user.password = newPassword
+        UserDBManager.updateUser(user)
         println("비밀번호가 성공적으로 변경되었습니다.")
     }
 
