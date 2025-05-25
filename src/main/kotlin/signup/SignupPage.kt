@@ -1,10 +1,12 @@
 package signup
 
 import common.UserData
+import main.MainPage
 
 class SignupPage {
 
     private val signupManager = SignupManager()
+    private val mainPage = MainPage()
 
     fun startSignup() {
         // Id 입력
@@ -33,5 +35,6 @@ class SignupPage {
         val newUser = UserData(name = inputNewUserName, id = inputNewUserId, password = inputNewUserPw)
         signupManager.signupNewUser(newUser)
         printSignupSuccessMessage()
+        mainPage.startMainPage()
     }
 }

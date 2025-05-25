@@ -1,10 +1,12 @@
 package login
 
 import database.UserDBManager
+import main.MainPage
 
 class LoginPage {
 
     private val loginManager = LoginManager()
+    private val mainPage = MainPage()
 
     fun startLogin() {
         // 로그인 시작 텍스트 출력
@@ -28,6 +30,7 @@ class LoginPage {
         // 로그인 정보 저장
         loginManager.loginSuccess(loginUserData)
         printLoginSuccessMessage()
+        mainPage.startMainPage()
     }
 
 }
