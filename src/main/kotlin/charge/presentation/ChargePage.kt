@@ -5,7 +5,7 @@ import common.Input
 import common.UserData
 
 class ChargePage {
-    fun chargeAmount(user: UserData) {
+    fun startChargePage(user: UserData) {
         println("\n|||| 금액 충전 페이지 ||||")
 
         while (true) {
@@ -35,7 +35,7 @@ class ChargePage {
                     )
                     println("${amount}원 충전 완료되었습니다.")
                     println("현재 잔액: ${user.balance}원")
-                    break
+                    return
                 }
             }
         }

@@ -3,6 +3,7 @@ package mypage
 import charge.presentation.ChargePage
 import common.Input
 import common.UserData
+import database.UserDBManager
 import orderhistory.presentation.OrderHistoryPage
 import password.presentation.ChangePasswordPage
 import userinfo.presentaion.UserInfoPage
@@ -14,7 +15,7 @@ class MyPage {
     private val orderHistoryPage = OrderHistoryPage()
     private val changePasswordPage = ChangePasswordPage()
 
-    fun show(userData: UserData) {
+    fun startMyPage(userData: UserData) {
         while (true) {
             println("\n|||| 마이페이지 ||||")
             println("[1] 금액 충전")
@@ -26,10 +27,10 @@ class MyPage {
             val input = Input.getStringInput("메뉴 선택 → ")
 
             when (input) {
-                "1" -> chargePage.chargeAmount(userData)
-                "2" -> userInfoPage.viewUserInfo(userData)
-                "3" -> orderHistoryPage.viewOrderHistory(userData)
-                "4" -> changePasswordPage.changePassword(userData)
+                "1" -> chargePage.startChargePage(userData)
+                "2" -> userInfoPage.startViewUserInfo(userData)
+                "3" -> orderHistoryPage.startOrderHistoryPage(userData)
+                "4" -> changePasswordPage.startChangePasswordPage(userData)
                 "0" -> {
                     println("이전 화면으로 돌아갑니다.")
                     return
