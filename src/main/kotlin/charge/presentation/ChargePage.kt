@@ -1,8 +1,8 @@
 package charge.presentation
 
 import charge.domain.ChargeService
-import common.Input
 import common.UserData
+import common.getStringInput
 
 class ChargePage {
     fun chargeAmount(user: UserData) {
@@ -12,7 +12,7 @@ class ChargePage {
             println("충전하실 금액을 입력해주세요. (최소금액: 5000원, 최대금액: 50000원)")
             println("[0]을 입력하면 이전 메뉴로 돌아갑니다.")
 
-            val input = Input.getStringInput("충전 금액 -> ")
+            val input = getStringInput("충전 금액 -> ")
 
             if (input == "0") {
                 println("이전 메뉴로 돌아갑니다.")

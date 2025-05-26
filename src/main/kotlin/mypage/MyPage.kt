@@ -1,8 +1,8 @@
 package mypage
 
 import charge.presentation.ChargePage
-import common.Input
 import common.UserData
+import common.getStringInput
 import orderhistory.presentation.OrderHistoryPage
 import password.presentation.ChangePasswordPage
 import userinfo.presentaion.UserInfoPage
@@ -23,7 +23,7 @@ class MyPage {
             println("[4] 비밀번호 변경")
             println("[0] 이전 화면으로 돌아가기")
 
-            val input = Input.getStringInput("메뉴 선택 → ")
+            val input = getStringInput("메뉴 선택 → ")
 
             when (input) {
                 "1" -> chargePage.chargeAmount(userData)
