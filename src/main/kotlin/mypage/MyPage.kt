@@ -1,8 +1,8 @@
 package mypage
 
 import charge.presentation.ChargePage
-import common.Input.getStringInput
 import common.UserData
+import common.getStringInput
 import orderhistory.presentation.OrderHistoryPage
 import password.presentation.ChangePasswordPage
 import userinfo.presentaion.UserInfoPage
@@ -16,14 +16,14 @@ class MyPage {
 
     fun startMyPage(userData: UserData) {
         while (true) {
-            println("\n|||| 마이페이지 ||||")
-            println("[1] 금액 충전")
-            println("[2] 유저 정보 조회")
-            println("[3] 주문 내역 조회")
-            println("[4] 비밀번호 변경")
-            println("[0] 이전 화면으로 돌아가기")
+            println(MyPageMessage.PAGE_TITLE)
+            println(MyPageMessage.MENU_CHARGE)
+            println(MyPageMessage.MENU_USER_INFO)
+            println(MyPageMessage.MENU_ORDER_HISTORY)
+            println(MyPageMessage.MENU_PASSWORD)
+            println(MyPageMessage.MENU_BACK)
 
-            val input = getStringInput("메뉴 선택 → ")
+            val input = getStringInput(MyPageMessage.INPUT_PROMPT)
 
             when (input) {
                 "1" -> chargePage.startChargePage(userData)
@@ -31,10 +31,10 @@ class MyPage {
                 "3" -> orderHistoryPage.startOrderHistoryPage(userData)
                 "4" -> changePasswordPage.startChangePasswordPage(userData)
                 "0" -> {
-                    println("이전 화면으로 돌아갑니다.")
+                    println(MyPageMessage.GOING_BACK)
                     return
                 }
-                else -> println("잘못된 입력입니다. 다시 선택해 주세요.")
+                else -> println(MyPageMessage.INVALID_INPUT)
             }
         }
     }
