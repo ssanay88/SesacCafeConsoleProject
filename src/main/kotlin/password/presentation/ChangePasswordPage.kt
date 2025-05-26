@@ -1,58 +1,59 @@
 package password.presentation
 
 import common.UserData
-import database.UserDBManager
+import password.ChangePasswordMessage
 
-
-class ChangePasswordPage {
-
+class ChangePasswordPage(
+    private val viewModel: ChangePasswordViewModel = ChangePasswordViewModel()
+) {
     fun startChangePasswordPage(user: UserData) {
-        println("\n|||| 비밀번호 수정 페이지 ||||")
+        println(ChangePasswordMessage.PAGE_TITLE)
 
-        val currentPassword = inputCurrentPassword(user) ?: return
-        val newPassword = inputNewPassword() ?: return
-        val confirmPassword = inputConfirmPassword(newPassword) ?: return
+        if (!checkCurrentPassword(user)) return
 
-        user.password = newPassword
-        UserDBManager.updateUser(user)
-        println("비밀번호가 성공적으로 변경되었습니다.")
+        val newPassword = getNewPassword() ?: return
+
+        if (!confirmPassword(newPassword)) return
+
+        viewModel.changePassword(user, newPassword)
+        println(ChangePasswordMessage.CHANGE_SUCCESS)
     }
 
-    private fun inputCurrentPassword(user: UserData): String? {
+    private fun checkCurrentPassword(user: UserData): Boolean {
         while (true) {
-            println("현재 비밀번호를 입력해 주세요.")
-            println("[0] 입력 시 이전 화면으로 돌아갑니다.")
-            print("현재 비밀번호 -> ")
+            println(ChangePasswordMessage.INPUT_CURRENT)
+            println(ChangePasswordMessage.INPUT_ZERO_BACK)
+            print(ChangePasswordMessage.CURRENT_PROMPT)
             val input = readln().trim()
 
             if (input == "0") {
-                println("이전 화면으로 돌아갑니다.")
-                return null
+                println(ChangePasswordMessage.GOING_BACK)
+                return false
             }
 
             if (input != user.password) {
-                println("비밀번호가 일치하지 않습니다. 다시 입력해 주세요.\n")
+                println(ChangePasswordMessage.CURRENT_NOT_MATCH)
                 continue
             }
 
-            return input
+            return true
         }
     }
 
-    private fun inputNewPassword(): String? {
+    private fun getNewPassword(): String? {
         while (true) {
-            println("새 비밀번호를 입력해 주세요. (4자리 이상)")
-            println("[0] 입력 시 이전 화면으로 돌아갑니다.")
-            print("새 비밀번호 -> ")
+            println(ChangePasswordMessage.INPUT_NEW)
+            println(ChangePasswordMessage.INPUT_ZERO_BACK)
+            print(ChangePasswordMessage.NEW_PROMPT)
             val input = readln().trim()
 
             if (input == "0") {
-                println("이전 화면으로 돌아갑니다.")
+                println(ChangePasswordMessage.GOING_BACK)
                 return null
             }
 
             if (input.length < 4) {
-                println("4자리 이상 입력해 주세요.\n")
+                println(ChangePasswordMessage.NEW_TOO_SHORT)
                 continue
             }
 
@@ -60,18 +61,18 @@ class ChangePasswordPage {
         }
     }
 
-    private fun inputConfirmPassword(expected: String): String? {
+    private fun confirmPassword(expected: String): Boolean {
         while (true) {
-            println("새 비밀번호를 다시 입력해 주세요.")
-            print("새 비밀번호 확인 -> ")
+            println(ChangePasswordMessage.INPUT_CONFIRM)
+            print(ChangePasswordMessage.CONFIRM_PROMPT)
             val input = readln().trim()
 
             if (input != expected) {
-                println("비밀번호가 일치하지 않습니다. 다시 입력해 주세요.\n")
+                println(ChangePasswordMessage.CONFIRM_NOT_MATCH)
                 continue
             }
 
-            return input
+            return true
         }
     }
 }
