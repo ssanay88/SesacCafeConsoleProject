@@ -40,16 +40,3 @@ class MyPage {
         }
     }
 }
-fun main() {
-    val myPage = MyPage()
-    val userData = UserData(
-        name = "fdf",
-        id = "fdfd",
-        password = "dfdf",
-        balance = 111111,
-        orderHistory = mutableListOf(),
-        stamp = 4
-    )
-    UserDBManager.registerNewUser(userData)
-    myPage.startMyPage(userData)
-}
