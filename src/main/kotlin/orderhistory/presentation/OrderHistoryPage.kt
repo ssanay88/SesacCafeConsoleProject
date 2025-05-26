@@ -24,8 +24,8 @@ class OrderHistoryPage {
             println("[${index + 1}] 주문번호: ${order.orderId}")
             println("주문 날짜: ${order.orderDate}")
             println("주문 항목:")
-            order.orderItems.forEach { (menu, qty) ->
-                println("   - $menu x $qty")
+            order.orderItems.forEach {
+                println("${it.menuName} x ${it.quantity}")
             }
             println("--------------------------------")
         }
