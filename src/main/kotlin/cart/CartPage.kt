@@ -4,101 +4,84 @@ import common.UserData
 import order.OrderPage.order
 import java.time.format.DateTimeFormatter
 
-object CartPage {
-    fun showCartPage(user: UserData) {
+class CartPage {
+
+    private val cartManager = CartManager()
+    private val cartView =  CartView()
+
+    fun startCartPage(user: UserData) {
         while(true) {
-            println("\n=== [ 장바구니 ] ===")
-            val cartItems = Cart.getItems()
+            val cartItems = cartManager.getItems(user.id)
+            cartView.printEnterCartUI()
 
             if (cartItems.isEmpty()) {
-                println("장바구니가 비어있습니다.")
+                cartView.printCartEmptyMessage()
                 return
             }
 
             val grouped = cartItems.groupBy { it.addedTime.toLocalDate() }
-
             grouped.forEach { (date, items) ->
-                println(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
-
+                cartView.printCartDate(date.toString())
                 items.forEachIndexed { index, item ->
                     val total = item.menu.price * item.quantity
-                    println("${index + 1}. ${item.menu.menuName}    ${item.menu.price}      ${item.quantity}      ${total}원")
+                    cartView.printCartItem(index + 1, item.menu.menuName, item.menu.price, item.quantity, total)
                 }
                 println()
             }
 
-            println("1. 주문하기")
-            println("2. 수량 변경")
-            println("3. 선택 메뉴 삭제")
-            println("4. 전체 메뉴 삭제")
-            println("-1. 메인 메뉴로 돌아가기")
-            print("입력: ")
+            cartView.printCartOptions()
 
             when (readLine()) {
                 "1" -> {
-                    order(user, cartItems)
+                    cartView.printOrderCompleteMessage()
                     return
                 }
 
                 "2" -> {
-                    var input: Int?
-                    while (true) {
-                        print("수량을 변경할 메뉴 번호를 입력하세요: ")
-                        input = readLine()?.toIntOrNull()
-                        if (input == null || input !in 1..cartItems.size) {
-                            println("잘못된 번호입니다. 다시 입력하세요.")
-                            continue
-                        }
-                        break
+                    cartView.printQuantityChangeUI()
+                    val input = readLine()?.toIntOrNull()
+                    if (input == null || input !in 1..cartItems.size) {
+                        cartView.printInvalidInputMessage()
+                        continue
                     }
 
-                    var newQty: Int?
-                    while (true) {
-                        print("새로운 수량을 입력하세요(1~9): ")
-                        newQty = readLine()?.toIntOrNull()
-                        if (newQty == null || newQty !in 1..9) {
-                            println("잘못된 수량입니다. 다시 입력하세요.")
-                            continue
-                        }
-                        break
+                    cartView.printQuantityInputUI()
+                    val newQty = readLine()?.toIntOrNull()
+                    if (newQty == null || newQty !in 1..9) {
+                        cartView.printInvalidInputMessage()
+                        continue
                     }
 
-                    val itemToUpdate = cartItems[input - 1]
-                    Cart.updateQuantity(itemToUpdate.menu, newQty)
-                    println("[${itemToUpdate.menu.menuName}]의 수량이 ${newQty}개로 변경되었습니다.")
+                    val menu = cartItems[input - 1].menu
+                    cartManager.updateQuantity(user.id, menu, newQty)
+                    cartView.printQuantityChangedMessage(menu.menuName, newQty)
                 }
 
                 "3" -> {
-                    var input: Int?
-                    while (true) {
-                        print("삭제할 메뉴 번호를 입력하세요: ")
-                        input = readLine()?.toIntOrNull()
-                        if (input == null || input !in 1..cartItems.size) {
-                            println("잘못된 번호입니다. 다시 입력하세요.")
-                            continue
-                        }
-                        break
+                    cartView.printDeleteItemUI()
+                    val input = readLine()?.toIntOrNull()
+                    if (input == null || input !in 1..cartItems.size) {
+                        cartView.printInvalidInputMessage()
+                        continue
                     }
 
-                    val itemToRemove = cartItems[input - 1]
-                    Cart.removeItem(itemToRemove.menu)
-                    println("[${itemToRemove.menu.menuName}]가 장바구니에서 삭제되었습니다.")
+                    val menu = cartItems[input - 1].menu
+                    cartManager.removeItem(user.id, menu)
+                    cartView.printItemRemovedMessage(menu.menuName)
                 }
 
                 "4" -> {
-                    print("정말로 장바구니를 비우시겠습니까? (Y/N): ")
+                    cartView.printClearCartConfirmationUI()
                     if (readLine()?.uppercase() == "Y") {
-                        Cart.clear()
-                        println("장바구니가 비워졌습니다.")
+                        cartManager.clear(user.id)
+                        cartView.printCartClearedMessage()
                         return
                     }
                 }
 
                 "-1" -> return
 
-                else -> {
-                    println("잘못된 입력입니다.")
-                }
+                else -> cartView.printInvalidInputMessage()
             }
         }
     }
