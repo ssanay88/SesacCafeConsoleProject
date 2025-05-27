@@ -1,10 +1,10 @@
 package login
 
 
-fun printEnterIdUI() {
-    println("[ 로그인 페이지 ]")
-    print("ID 입력 : ")
-}
+fun printEnterIdUI() = print("""
+    [ 로그인 페이지 ]
+    ID 입력 :
+""".trimIndent())
 
 fun printIdNotExistUI() = print("ID가 존재하지 않습니다. 재입력 해주세요 : ")
 

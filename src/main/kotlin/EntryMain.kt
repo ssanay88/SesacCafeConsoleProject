@@ -1,37 +1,34 @@
+import common.inputOneToMax
+import common.printDivLine
 import login.LoginPage
 import signup.SignupPage
 
 fun main() {
-//    val newUser = UserData("양대리", "pplloo748", "q1w2e3r4")
-//    UserDBManager.addNewUser(newUser)
     startSesacCafePG()
 }
 
 fun startSesacCafePG() {
-    println("[새싹 카페 주문 프로그램 실행]")
-    print("로그인을 원하시는 경우 1번, 신규 회원 가입을 원하시는 경우 2번을 입력해주세요. : ")
-    when (readln().trim().toInt()) {
+    print("""
+        [ 새싹 카페 주문 프로그램 실행 ]
+        (1) 로그인 
+        (2) 신규 회원 가입
+        원하시는 동작을 입력해주세요 : 
+    """.trimIndent())
+    val input = inputOneToMax(2)
+    when (input) {
         1 -> startLoginPage()
         2 -> startSignupPage()
         else -> println("잘못된 입력입니다.")
     }
+    printDivLine()
 }
 
 fun startLoginPage() {
     val loginPage = LoginPage()
     loginPage.startLogin()
-    goToMainPage()
 }
 
 fun startSignupPage() {
-    val signuPage = SignupPage()
-    signuPage.startSignup()
-    goToMainPage()
+    val signupPage = SignupPage()
+    signupPage.startSignup()
 }
-
-fun goToMainPage() {
-
-}
-
-
-
