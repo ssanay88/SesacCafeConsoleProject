@@ -1,76 +1,75 @@
 package menu
 
-import cart.Cart
 import cart.CartItem
-import cart.showCartPage
+import cart.CartManager
+import cart.CartPage
 import common.UserData
 import order.OrderPage
-import kotlin.collections.get
 
-fun showMenuPage(user: UserData) {
-    println("\n=== [ 메뉴 페이지 ] ===")
-    Menu.values().forEachIndexed { index, menu ->
-        println("${index + 1}. ${menu.menuName} (${menu.price}원)")
-    }
+class MenuPage {
 
-    print("\n메뉴 번호를 선택하세요: ")
-    val choice = readLine()?.toIntOrNull()
+    private val cartManager = CartManager()
+    private val menuView = MenuView()
 
-    val selectedMenu = if (choice != null && choice in 1..Menu.values().size) {
-        Menu.values()[choice - 1]
-    } else {
-        println("잘못된 선택입니다.")
-        return
-    }
-    println()
+    fun startMenuPage(user: UserData) {
 
-    var quantity: Int? = null
-    while (true) {
-        print("[${selectedMenu.menuName}]의 주문수량을 입력하세요(1~9개): ")
-        val input = readLine()?.toIntOrNull()
+        menuView.printMenuPageUI()
 
-        if (input == null || input !in 1..9) {
-            println("잘못된 수량입니다.")
-        } else {
-            quantity = input
-            break
+        Menu.values().forEachIndexed { index, menu ->
+            menuView.printMenuItem(index, menu.menuName, menu.price)
         }
-    }
 
-    println("선택한 메뉴: ${selectedMenu.menuName} x ${quantity}개")
-    println()
+        menuView.printMenuSelectionUI()
 
-    println("1. 장바구니에 담기")
-    println("2. 주문하기")
-    print("입력: ")
-    when (readLine()) {
-        "1" -> {
-            Cart.addItem(CartItem(selectedMenu, quantity))
-            println("\n[${selectedMenu.menuName}] ${quantity}개를 장바구니에 담았습니다.")
-            println()
+        val choice = readLine()?.toIntOrNull()
+        val selectedMenu = if (choice != null && choice in 1..Menu.values().size) {
+            Menu.values()[choice - 1]
+        } else {
+            menuView.printInvalidMenuSelectionUI()
+            return
+        }
 
-            while (true) {
-                println("1. 장바구니로 이동하기")
-                println("2. 메뉴 페이지로 돌아가기")
-                print("입력: ")
-                when (readLine()) {
-                    "1" -> {
-                        showCartPage(user)
-                        break
-                    }
-                    "2" -> {
-                        showMenuPage(user)
-                        break
-                    }
-                    else -> println("잘못된 입력입니다. 다시 선택하세요.")
-                }
+        var quantity: Int? = null
+        while (true) {
+            menuView.printQuantityInputUI(selectedMenu.menuName)
+            val input = readLine()?.toIntOrNull()
+
+            if (input == null || input !in 1..9) {
+                menuView.printInvalidQuantityMessage()
+            } else {
+                quantity = input
+                break
             }
         }
-        "2" -> {
-//            println("[${selectedMenu.menuName}] ${quantity}개를 주문이 완료되었습니다.")
-            val item = CartItem(selectedMenu, quantity)
-            OrderPage.order(user, listOf(item))
+
+        menuView.printSelectedMenuMessage(selectedMenu.menuName, quantity)
+        menuView.printOrderOptions()
+
+        when (readLine()) {
+            "1" -> {
+                cartManager.addItem(user.id, CartItem(selectedMenu, quantity))
+                menuView.printAddedToCartMessage(selectedMenu.menuName, quantity)
+
+                while (true) {
+                    menuView.printAfterAddOptions()
+                    when (readLine()) {
+                        "1" -> {
+                            CartPage().startCartPage(user)
+                            break
+                        }
+                        "2" -> {
+                            startMenuPage(user)
+                            break
+                        }
+                        else -> menuView.printInvalidInputMessage()
+                    }
+                }
+            }
+            "2" -> {
+                val item = CartItem(selectedMenu, quantity)
+                OrderPage.order(user, listOf(item))
+            }
+            else -> menuView.printInvalidInputMessage()
         }
-        else -> println("잘못된 선택입니다.")
     }
 }
