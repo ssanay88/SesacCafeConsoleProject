@@ -2,7 +2,7 @@ package auth.login
 
 import auth.AuthManager
 import core.UserData
-import core.database.UserDBManager
+import core.UserDBManager
 
 class LoginManager {
 

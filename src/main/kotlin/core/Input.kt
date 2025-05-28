@@ -1,5 +1,8 @@
 package core
 
+/**
+ * 입력에 사용할 함수를 모아둔 파일
+ */
 fun getStringInput(text: String): String {
     print(text)
     return readlnOrNull()?.trim() ?: ""

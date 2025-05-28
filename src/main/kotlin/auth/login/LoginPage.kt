@@ -3,7 +3,7 @@ package auth.login
 import core.getUserIdInput
 import core.getUserPwInput
 import core.printDivLine
-import core.database.UserDBManager
+import core.UserDBManager
 import home.HomePage
 
 class LoginPage {

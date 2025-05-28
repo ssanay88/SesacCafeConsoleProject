@@ -4,11 +4,9 @@ import auth.AuthManager
 import feature.cart.CartManager
 import feature.cart.CartPage
 import core.inputZeroToMax
-import core.database.UserDBManager
 import feature.menu.MenuPage
 import feature.mypage.MyPage
 import feature.order.OrderPage
-import kotlin.system.exitProcess
 
 class HomePage() {
 
@@ -23,9 +21,9 @@ class HomePage() {
         while (true) {
             val isCartEmpty = cartManager.getItems(nowUser.id).isEmpty()
             if (isCartEmpty) {
-                printShowMainMenu()
+                printShowHomeMenu()
             } else {
-                printShowMainMenuWithCart()
+                printShowHomeMenuWithCart()
             }
 
             when (inputZeroToMax(if (isCartEmpty) 3 else 4)) {

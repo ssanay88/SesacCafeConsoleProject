@@ -1,6 +1,6 @@
 package home
 
-fun printShowMainMenu() = print("""
+fun printShowHomeMenu() = print("""
     [ 메인 페이지 ]
     (1) 메뉴 페이지로 이동
     (2) 주문 페이지로 이동
@@ -9,7 +9,7 @@ fun printShowMainMenu() = print("""
     이동할 페이지를 선택해주세요 : 
 """.trimIndent())
 
-fun printShowMainMenuWithCart() = print("""
+fun printShowHomeMenuWithCart() = print("""
     [ 메인 페이지 ]
     (1) 메뉴 페이지로 이동
     (2) 주문 페이지로 이동

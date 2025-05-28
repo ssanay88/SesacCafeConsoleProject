@@ -1,7 +1,7 @@
 package auth.signup
 
 import core.UserData
-import core.database.UserDBManager
+import core.UserDBManager
 
 class SignupManager {
 

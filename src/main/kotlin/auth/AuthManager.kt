@@ -1,7 +1,7 @@
 package auth
 
 import core.UserData
-import core.database.UserDBManager
+import core.UserDBManager
 import feature.order.Order
 
 /**
