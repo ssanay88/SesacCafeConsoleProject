@@ -1,8 +1,8 @@
 package mypage
 
 import charge.presentation.ChargePage
-import common.Input.getStringInput
 import common.UserData
+import common.getStringInput
 import orderhistory.presentation.OrderHistoryPage
 import password.presentation.ChangePasswordPage
 import userinfo.presentaion.UserInfoPage

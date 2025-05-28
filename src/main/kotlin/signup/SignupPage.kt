@@ -1,6 +1,7 @@
 package signup
 
 import common.UserData
+import common.printDivLine
 import main.MainPage
 
 class SignupPage {
@@ -35,6 +36,7 @@ class SignupPage {
         val newUser = UserData(name = inputNewUserName, id = inputNewUserId, password = inputNewUserPw)
         signupManager.signupNewUser(newUser)
         printSignupSuccessMessage()
+        printDivLine()
         mainPage.startMainPage()
     }
 }
