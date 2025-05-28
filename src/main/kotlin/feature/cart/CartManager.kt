@@ -2,7 +2,7 @@ package feature.cart
 
 import feature.menu.Menu
 
-class CartManager {
+object CartManager {
 
     private val userCart = mutableMapOf<String, MutableList<CartItem>>()
 
