@@ -1,7 +1,7 @@
-import common.inputOneToMax
-import common.printDivLine
-import login.LoginPage
-import signup.SignupPage
+import core.inputOneToMax
+import core.printDivLine
+import auth.login.LoginPage
+import auth.signup.SignupPage
 
 fun main() {
     startSesacCafePG()
