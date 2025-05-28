@@ -52,7 +52,10 @@ class OrderPage{
 
         val order = Order(orderItems = orderItems)
 
-        orderManager.saveOrder(user, order)
+        orderManager.apply {
+            saveOrder(user, order)
+            addStamp(user)
+        }
 
         orderView.printOrderCompleteMessage(userPoint, amountToPay, user)
     }
