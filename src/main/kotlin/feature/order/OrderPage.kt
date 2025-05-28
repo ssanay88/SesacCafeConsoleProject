@@ -6,7 +6,7 @@ import core.UserData
 
 class OrderPage{
 
-    private val cartManager = CartManager()
+   // private val cartManager = CartManager()
     private val orderView = OrderView()
     private val orderManager = OrderManager()
 
@@ -40,7 +40,7 @@ class OrderPage{
 
         user.stamp -= userPoint
         user.balance -= amountToPay
-        cartManager.clear(user.id)
+        CartManager.clear(user.id)
 
         val orderItems = items.map { cartItem ->
             OrderItem(

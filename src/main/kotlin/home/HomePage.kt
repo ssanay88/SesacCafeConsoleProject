@@ -10,7 +10,7 @@ import feature.order.OrderPage
 
 class HomePage() {
 
-    private val cartManager = CartManager()
+    //private val cartManager = CartManager()
     private val menuPage = MenuPage()
     private val orderPage = OrderPage()
     private val myPage = MyPage()
@@ -19,7 +19,7 @@ class HomePage() {
     fun startHomePage() {
         val nowUser = AuthManager.currentUser!!
         while (true) {
-            val isCartEmpty = cartManager.getItems(nowUser.id).isEmpty()
+            val isCartEmpty = CartManager.getItems(nowUser.id).isEmpty()
             if (isCartEmpty) {
                 printShowHomeMenu()
             } else {
@@ -28,7 +28,7 @@ class HomePage() {
 
             when (inputZeroToMax(if (isCartEmpty) 3 else 4)) {
                 1 -> menuPage.startMenuPage(nowUser)
-                2 -> orderPage.startOrderPage(nowUser, cartManager.getItems(nowUser.id))
+                2 -> orderPage.startOrderPage(nowUser, CartManager.getItems(nowUser.id))
                 3 -> myPage.startMyPage(nowUser)
                 4 -> cartPage.startCartPage(nowUser)
                 0 -> return

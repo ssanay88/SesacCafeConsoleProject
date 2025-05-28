@@ -1,0 +1,22 @@
+[
+  {
+    "name": "test",
+    "id": "test1234",
+    "password": "1234",
+    "balance": 1000,
+    "orderHistory": [
+      {
+        "orderId": "bb2c4c7e-9852-4d39-936a-f27908077e07",
+        "orderDate": "2025-05-28T14:21:55.263623",
+        "orderItems": [
+          {
+            "menuId": "아메리카노",
+            "menuName": "아메리카노",
+            "quantity": 1
+          }
+        ]
+      }
+    ],
+    "stamp": 0
+  }
+]

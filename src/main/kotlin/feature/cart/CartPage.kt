@@ -1,15 +1,17 @@
 package feature.cart
 
 import core.UserData
+import feature.order.Order
+import feature.order.OrderPage
 
 class CartPage {
 
-    private val cartManager = CartManager()
+    //private val cartManager = CartManager()
     private val cartView =  CartView()
 
     fun startCartPage(user: UserData) {
         while(true) {
-            val cartItems = cartManager.getItems(user.id)
+            val cartItems = CartManager.getItems(user.id)
             cartView.printEnterCartUI()
 
             if (cartItems.isEmpty()) {
@@ -31,6 +33,7 @@ class CartPage {
 
             when (readLine()) {
                 "1" -> {
+                    OrderPage().startOrderPage(user, cartItems)
                     cartView.printOrderCompleteMessage()
                     return
                 }
@@ -51,7 +54,7 @@ class CartPage {
                     }
 
                     val menu = cartItems[input - 1].menu
-                    cartManager.updateQuantity(user.id, menu, newQty)
+                    CartManager.updateQuantity(user.id, menu, newQty)
                     cartView.printQuantityChangedMessage(menu.menuName, newQty)
                 }
 
@@ -64,14 +67,14 @@ class CartPage {
                     }
 
                     val menu = cartItems[input - 1].menu
-                    cartManager.removeItem(user.id, menu)
+                    CartManager.removeItem(user.id, menu)
                     cartView.printItemRemovedMessage(menu.menuName)
                 }
 
                 "4" -> {
                     cartView.printClearCartConfirmationUI()
                     if (readLine()?.uppercase() == "Y") {
-                        cartManager.clear(user.id)
+                        CartManager.clear(user.id)
                         cartView.printCartClearedMessage()
                         return
                     }
