@@ -1,43 +1,42 @@
 package charge.presentation
 
-import charge.domain.ChargeService
+import charge.ChargeMessage
 import common.UserData
 import common.getStringInput
 
-class ChargePage {
+class ChargePage(
+    private val viewModel: ChargeViewModel = ChargeViewModel()
+) {
     fun startChargePage(user: UserData) {
-        println("\n|||| 금액 충전 페이지 ||||")
+        println(ChargeMessage.CHARGE_PAGE_TITLE)
 
         while (true) {
-            println("충전하실 금액을 입력해주세요. (최소금액: 5000원, 최대금액: 50000원)")
-            println("[0]을 입력하면 이전 메뉴로 돌아갑니다.")
+            println(ChargeMessage.CHARGE_GUIDE)
+            println(ChargeMessage.GO_BACK_GUIDE)
 
-            val input = getStringInput("충전 금액 -> ")
+            val input = getStringInput(ChargeMessage.CHARGE_INPUT_PROMPT)
 
             if (input == "0") {
-                println("이전 메뉴로 돌아갑니다.")
+                println(ChargeMessage.GOING_BACK)
                 break
             }
 
             val amount = input.toIntOrNull()
-
-            when {
-                amount == null -> println("숫자만 입력해주세요.")
-
-                amount < 5000 -> println("최소 충전 금액은 5000원입니다.")
-
-                amount > 50000 -> println("최대 충전 금액은 50000원입니다.")
-
-                else -> {
-                    ChargeService.charge(
-                        userData = user,
-                        amount = amount
-                    )
-                    println("${amount}원 충전 완료되었습니다.")
-                    println("현재 잔액: ${user.balance}원")
-                    return
-                }
+            if (amount == null) {
+                println(ChargeMessage.INVALID_INPUT)
+                continue
             }
+
+            val validation = viewModel.isAmountValid(amount)
+            if (validation != null) {
+                println(validation)
+                continue
+            }
+
+            viewModel.charge(user, amount)
+            println(ChargeMessage.CHARGE_COMPLETE.format(amount))
+            println(ChargeMessage.CURRENT_BALANCE.format(user.balance))
+            return
         }
     }
 }
