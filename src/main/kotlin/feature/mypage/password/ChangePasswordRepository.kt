@@ -1,7 +1,7 @@
 package feature.mypage.password
 
 import core.UserData
-import core.database.UserDBManager
+import core.UserDBManager
 
 class ChangePasswordRepository {
     fun updateUser(user: UserData) {

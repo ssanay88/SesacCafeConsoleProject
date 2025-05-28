@@ -1,7 +1,7 @@
 package feature.charge
 
 import core.UserData
-import core.database.UserDBManager
+import core.UserDBManager
 
 class ChargeRepository {
     fun updateUser(user: UserData) {

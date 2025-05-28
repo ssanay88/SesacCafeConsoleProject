@@ -1,4 +1,4 @@
-package core.database
+package core
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -6,7 +6,6 @@ import com.google.gson.JsonDeserializer
 import com.google.gson.JsonPrimitive
 import com.google.gson.JsonSerializer
 import com.google.gson.reflect.TypeToken
-import core.UserData
 import java.io.File
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

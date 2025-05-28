@@ -2,7 +2,7 @@ import core.inputOneToMax
 import core.printDivLine
 import auth.login.LoginPage
 import auth.signup.SignupPage
-import core.database.UserDBManager
+import core.UserDBManager
 
 fun main() {
     startSesacCafePG()
