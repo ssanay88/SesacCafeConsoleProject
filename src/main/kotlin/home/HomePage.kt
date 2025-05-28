@@ -20,25 +20,24 @@ class HomePage() {
 
     fun startHomePage() {
         val nowUser = AuthManager.currentUser!!
-        val isCartEmpty = cartManager.getItems(nowUser.id).isEmpty()
-        if (isCartEmpty) {
-            printShowMainMenu()
-        } else {
-            printShowMainMenuWithCart()
+        while (true) {
+            val isCartEmpty = cartManager.getItems(nowUser.id).isEmpty()
+            if (isCartEmpty) {
+                printShowMainMenu()
+            } else {
+                printShowMainMenuWithCart()
+            }
+
+            when (inputZeroToMax(if (isCartEmpty) 3 else 4)) {
+                1 -> menuPage.startMenuPage(nowUser)
+                2 -> orderPage.startOrderPage(nowUser, cartManager.getItems(nowUser.id))
+                3 -> myPage.startMyPage(nowUser)
+                4 -> cartPage.startCartPage(nowUser)
+                0 -> return
+                else -> println("잘못된 입력")
+            }
         }
 
-        when (inputZeroToMax(if (isCartEmpty) 3 else 4)) {
-            0 -> {
-                UserDBManager.saveChangesToFile()
-                println("새싹 카페 프로그램 종료합니다. 감사합니다.")
-                exitProcess(0)
-            }
-            1 -> menuPage.startMenuPage(nowUser)
-            2 -> orderPage.startOrderPage(nowUser, cartManager.getItems(nowUser.id))
-            3 -> myPage.startMyPage(nowUser)
-            4 -> cartPage.startCartPage(nowUser)
-            else -> println("잘못된 입력")
-        }
     }
 
 }

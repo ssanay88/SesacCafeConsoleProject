@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter
 
 object UserDBManager {
 
-    const val USER_DB_PATH = "src/main/kotlin/database/userDB.json"
+    const val USER_DB_PATH = "userFile/userDB.json"
     private val usersInMemory: MutableList<UserData> = mutableListOf()
     private val userDBFile = File(USER_DB_PATH)
     private val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
