@@ -10,12 +10,10 @@ class ChargeUseCase(
         repository.updateUser(user)
     }
 
-    fun isChargeAmountValid(amount: Int): String? {
-        return when {
-            amount < 5000 -> ChargeMessage.AMOUNT_TOO_LOW
-            amount > 50000 -> ChargeMessage.AMOUNT_TOO_HIGH
-            else -> null
-        }
+    fun isChargeAmountValid(amount: Int) = when {
+        amount < 5000 -> ChargeMessage.AMOUNT_TOO_LOW
+        amount > 50000 -> ChargeMessage.AMOUNT_TOO_HIGH
+        else -> ""
     }
 
 }

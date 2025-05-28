@@ -71,7 +71,7 @@ fun getUserPwInput(): String {
     var input = readln()
     while (true) {
         if (input.isEmpty()) {
-            print("에러 : PW를 입력해주세요. ID 재입력 : ")
+            print("에러 : PW를 입력해주세요. PW 재입력 : ")
             input = readln()
         } else if (input.contains(" ")) {
             print("에러 : PW에 공백을 포함할 수 없습니다. PW 재입력 : ")

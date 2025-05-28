@@ -3,7 +3,7 @@ package auth.signup
 import core.UserData
 import core.printDivLine
 import auth.login.LoginManager
-import home.HomePage
+import main.HomePage
 
 class SignupPage {
 

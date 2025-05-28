@@ -1,4 +1,4 @@
-package home
+package main
 
 fun printShowHomeMenu() = print("""
     [ 메인 페이지 ]

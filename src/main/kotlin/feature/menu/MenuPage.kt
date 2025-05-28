@@ -32,7 +32,7 @@ class MenuPage {
         var quantity: Int = 0
         while (true) {
             menuView.printQuantityInputUI(selectedMenu.menuName)
-            val input = readLine()?.toIntOrNull()
+            val input = readLine()?.toIntOrNull()    // 입력 - 싱글톤으로 변경
 
             if (input == null || input !in 1..9) {
                 menuView.printInvalidQuantityMessage()

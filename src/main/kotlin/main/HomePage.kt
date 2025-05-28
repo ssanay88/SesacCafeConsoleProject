@@ -1,4 +1,4 @@
-package home
+package main
 
 import auth.AuthManager
 import feature.cart.CartManager
