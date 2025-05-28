@@ -10,20 +10,39 @@ fun getIntInput(text: String): Int? {
     return input.toIntOrNull()
 }
 
+fun getOnlyNumInput() : Int {
+    val numericRegex = "^[0-9]+$".toRegex()
+
+    while (true) {
+        val input = readln().trim()
+
+        if (input.isEmpty()) {
+            print("에러 : 아무것도 입력되지 않았습니다. 숫자를 입력해주세요 : ")
+            continue
+        }
+
+        if (input.matches(numericRegex)) {
+            return input.toInt()
+        } else {
+            print("에러 : 숫자만 입력 가능합니다. 다시 입력해주세요 : ")
+        }
+    }
+}
+
 fun inputZeroToMax(maxInput: Int): Int {
-    var input = readln().toInt()
+    var input = getOnlyNumInput()
     while (input !in 0..maxInput) {
         print("0 ~ ${maxInput}까지의 숫자를 입력해주세요 : ")
-        input = readln().toInt()
+        input = getOnlyNumInput()
     }
     return input
 }
 
 fun inputOneToMax(maxInput: Int): Int {
-    var input = readln().toInt()
+    var input = getOnlyNumInput()
     while (input !in 1..maxInput) {
         print("1 ~ ${maxInput}까지의 숫자를 입력해주세요 : ")
-        input = readln().toInt()
+        input = getOnlyNumInput()
     }
     return input
 }
