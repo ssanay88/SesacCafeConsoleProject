@@ -2,6 +2,7 @@ import core.inputOneToMax
 import core.printDivLine
 import auth.login.LoginPage
 import auth.signup.SignupPage
+import core.database.UserDBManager
 
 fun main() {
     startSesacCafePG()
@@ -20,6 +21,8 @@ fun startSesacCafePG() {
         2 -> startSignupPage()
         else -> println("잘못된 입력입니다.")
     }
+    UserDBManager.saveChangesToFile()
+    println("새싹 카페 프로그램 종료합니다. 감사합니다.")
     printDivLine()
 }
 
