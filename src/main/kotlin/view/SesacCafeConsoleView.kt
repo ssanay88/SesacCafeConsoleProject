@@ -1,12 +1,8 @@
 package view
 
-import common.CommonMessage
-import common.UserDBManager
-import common.inputOneToMax
-import common.printDivLine
+import common.*
 import view.login.LoginPage
 import view.signup.SignupPage
-import kotlin.math.E
 
 object SesacCafeConsoleView {
 
@@ -20,7 +16,7 @@ object SesacCafeConsoleView {
 
     fun startSesacCafePG() {
         print(START_PG_MESSAGE.trimIndent())
-        val input = inputOneToMax(2)
+        val input = Input.inputOneToMax(2)
         when (input) {
             1 -> startLoginPage()
             2 -> startSignupPage()
@@ -28,7 +24,7 @@ object SesacCafeConsoleView {
         }
         UserDBManager.saveChangesToFile()
         println(END_PG_MESSAGE)
-        printDivLine()
+        Input.printDivLine()
     }
 
     fun startLoginPage() {

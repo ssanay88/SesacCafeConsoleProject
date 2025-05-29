@@ -1,7 +1,7 @@
 package view.signup
 
+import common.Input
 import common.UserData
-import common.printDivLine
 import view.home.HomePage
 import viewmodel.login.LoginManager
 import viewmodel.signup.SignupManager
@@ -41,7 +41,7 @@ class SignupPage {
         // 로그인 정보 저장
         loginManager.loginSuccess(newUser)
         printSignupSuccessMessage()
-        printDivLine()
+        Input.printDivLine()
         homePage.startHomePage()
     }
 }

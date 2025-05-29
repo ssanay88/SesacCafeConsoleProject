@@ -1,8 +1,8 @@
 package view.home
 
 import common.AuthManager
+import common.Input
 import view.cart.CartPage
-import common.inputZeroToMax
 import view.menu.MenuPage
 import view.mypage.MyPage
 import view.order.OrderPage
@@ -26,7 +26,7 @@ class HomePage() {
                 printShowHomeMenuWithCart()
             }
 
-            when (inputZeroToMax(if (isCartEmpty) 3 else 4)) {
+            when (Input.inputZeroToMax(if (isCartEmpty) 3 else 4)) {
                 1 -> menuPage.startMenuPage(nowUser)
                 2 -> orderPage.startOrderPage(nowUser, cartManager.getItems(nowUser.id))
                 3 -> myPage.startMyPage(nowUser)
