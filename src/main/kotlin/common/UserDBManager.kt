@@ -1,14 +1,10 @@
 package common
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonDeserializer
-import com.google.gson.JsonPrimitive
-import com.google.gson.JsonSerializer
-import com.google.gson.reflect.TypeToken
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import java.io.File
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 /**
  * User Database CURD 처리를 위한 매니저 클래스
@@ -21,53 +17,53 @@ object UserDBManager {
     const val USER_DB_PATH = "userFile/userDB.json"
     private val usersInMemory: MutableList<UserData> = mutableListOf()
     private val userDBFile = File(USER_DB_PATH)
-    private val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
-    private val gson: Gson = GsonBuilder()
-        .registerTypeAdapter(
-            LocalDateTime::class.java,
-            JsonSerializer<LocalDateTime> { src, typeOfSrc, context ->
-                JsonPrimitive(src.format(dateTimeFormatter))
-            }
-        )
-        .registerTypeAdapter(
-            LocalDateTime::class.java,
-            JsonDeserializer<LocalDateTime> { json, typeOfT, context ->
-                LocalDateTime.parse(json.asString, dateTimeFormatter)
-            }
-        )
-        .setPrettyPrinting() // JSON 출력을 예쁘게 포맷팅 (선택 사항)
-        .create()
+    private val moshi by lazy {
+        Moshi.Builder()
+            .add(LocalDateTime::class.java, LocalDateTimeAdapter)
+            .build()
+    }
+    private val userListAdapter: JsonAdapter<List<UserData>> = moshi.adapter(
+        Types.newParameterizedType(List::class.java, UserData::class.java)
+    )
 
     init {
         loadUsersFromFile()
     }
 
     private fun loadUsersFromFile() {
-        if (!userDBFile.exists()) {
-            userDBFile.createNewFile()
-            userDBFile.writeText("[]")
-        }
-
-        try {
-            if (userDBFile.length() > 0) {
-                val fileContent = userDBFile.readText()
-                val listType = object : TypeToken<MutableList<UserData>>() {}.type
-                val loadUsers = gson.fromJson<MutableList<UserData>>(fileContent, listType) ?: mutableListOf()
-                usersInMemory.addAll(loadUsers ?: mutableListOf())
+        runCatching {
+            if (!userDBFile.exists()) {
+                userDBFile.createNewFile()
+                userDBFile.writeText("[]") // 빈 JSON 배열로 초기화
+                usersInMemory.clear()
+                return
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            usersInMemory.clear()
+
+            if (userDBFile.length() == 0L) {
+                userDBFile.writeText("[]") // 깔끔하게 빈 JSON 배열로 덮어쓰기
+                usersInMemory.clear()
+                return
+            }
+
+            val fileContent = userDBFile.readText() // 파일 내용을 문자열로 읽기
+            val loadedUsers = userListAdapter.fromJson(fileContent) // Moshi로 역직렬화
+            // 불러온 데이터가 null이 아닐 경우에만 추가
+            usersInMemory.addAll(loadedUsers ?: emptyList())
+        }.onSuccess {
+            println("파일 불러오기 성공")
+        }.onFailure {
+            println("파일 불러오기 실패")
         }
     }
 
     fun saveChangesToFile() {
-        try {
-            userDBFile.writeText(gson.toJson(usersInMemory))
-            println("변경된 유저 데이터들이 성공적으로 저장되었습니다.")
-        } catch (e: Exception) {
-            System.err.println("유저 데이터를 파일에 저장하는 중 오류 발생: ${e.message}")
-            e.printStackTrace()
+        runCatching {
+            val json = userListAdapter.toJson(usersInMemory) // Moshi로 직렬화
+            userDBFile.writeText(json) // JSON 문자열을 파일에 쓰기
+        }.onSuccess {
+            println("파일 저장하기 성공")
+        }.onFailure {
+            println("파일 저장하기 실패")
         }
     }
 
