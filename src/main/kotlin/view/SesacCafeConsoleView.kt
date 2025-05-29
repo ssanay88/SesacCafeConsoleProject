@@ -20,7 +20,7 @@ object SesacCafeConsoleView {
         when (input) {
             1 -> startLoginPage()
             2 -> startSignupPage()
-            else -> println(CommonMessage.ERROR_INVALID_INPUT)
+            else -> println(CommonConstants.ERROR_INVALID_INPUT)
         }
         UserDBManager.saveChangesToFile()
         println(END_PG_MESSAGE)
