@@ -1,10 +1,10 @@
 package view.password
 
 import common.UserData
-import viewmodel.password.ChangePasswordViewModel
+import viewmodel.password.ChangePasswordManager
 
 class ChangePasswordPage(
-    private val viewModel: ChangePasswordViewModel = ChangePasswordViewModel()
+    private val changePasswordManager: ChangePasswordManager = ChangePasswordManager()
 ) {
     fun startChangePasswordPage(user: UserData) {
         println(ChangePasswordMessage.PAGE_TITLE)
@@ -15,7 +15,7 @@ class ChangePasswordPage(
 
         if (!confirmPassword(newPassword)) return
 
-        viewModel.changePassword(user, newPassword)
+        changePasswordManager.changePassword(user, newPassword)
         println(ChangePasswordMessage.CHANGE_SUCCESS)
     }
 
