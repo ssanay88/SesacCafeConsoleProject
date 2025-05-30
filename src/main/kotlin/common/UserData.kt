@@ -1,10 +1,8 @@
 package common
 
-import com.squareup.moshi.JsonClass
 import model.order.Order
 import java.io.Serializable
 
-@JsonClass(generateAdapter = true)
 data class UserData(
     val name: String,
     val id: String,

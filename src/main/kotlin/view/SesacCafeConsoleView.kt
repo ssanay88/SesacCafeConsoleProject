@@ -35,13 +35,13 @@ object SesacCafeConsoleView {
         println(END_PG_MESSAGE)
     }
 
-    fun startLoginPage() {
+    private fun startLoginPage() {
         Input.printDivLine()
         val loginPage = LoginPage()
         loginPage.startLogin()
     }
 
-    fun startSignupPage() {
+    private fun startSignupPage() {
         Input.printDivLine()
         val signupPage = SignupPage()
         signupPage.startSignup()
