@@ -1,7 +1,7 @@
 package view.signup
 
+import common.Input
 import common.UserData
-import common.printDivLine
 import view.home.HomePage
 import viewmodel.login.LoginManager
 import viewmodel.signup.SignupManager
@@ -14,25 +14,25 @@ class SignupPage {
 
     fun startSignup() {
         // Id 입력
-        printEnterNewIdUI()
+        print(SignupConstants.ENTER_NEW_ID.trimIndent())
         var inputNewUserId = readln().trim()
 
         while (signupManager.isUserNameTaken(inputNewUserId)) {
-            printEnterIdIsTaken()
+            print(SignupConstants.ENTER_ID_IS_TAKEN)
             inputNewUserId = readln().trim()
         }
 
         // 이름 입력
-        printEnterNewNameUI()
+        print(SignupConstants.ENTER_NEW_NAME)
         val inputNewUserName = readln().trim()
 
         // PW 입력
-        printEnterNewPwUI()
+        print(SignupConstants.ENTER_NEW_PW)
         var inputNewUserPw = readln().trim()
-        printEnterPwRepeatUI()
+        print(SignupConstants.ENTER_NEW_PW_REPEAT)
         while (inputNewUserPw != readln().trim()) {
             // 비밀번호 확인 실패
-            printFailToCheckPwUI()
+            print(SignupConstants.FAIL_TO_CHECK_PW)
         }
 
         // 신규 유저 등록
@@ -40,8 +40,8 @@ class SignupPage {
         signupManager.signupNewUser(newUser)
         // 로그인 정보 저장
         loginManager.loginSuccess(newUser)
-        printSignupSuccessMessage()
-        printDivLine()
+        println(SignupConstants.SIGNUP_SUCCESS_MESSAGE)
+        Input.printDivLine()
         homePage.startHomePage()
     }
 }

@@ -1,7 +1,7 @@
 package view.charge
 
+import common.Input.getStringInput
 import common.UserData
-import common.getStringInput
 import viewmodel.charge.ChargeViewModel
 
 class ChargePage(
