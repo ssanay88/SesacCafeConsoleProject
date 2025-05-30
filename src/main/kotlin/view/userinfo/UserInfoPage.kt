@@ -4,6 +4,7 @@ import common.UserData
 
 class UserInfoPage {
     fun startViewUserInfo(user: UserData) {
+        println(UserInfoMessage.PAGE_SEPARATOR)
         println(UserInfoMessage.PAGE_TITLE)
         println(UserInfoMessage.NAME.format(user.name))
         println(UserInfoMessage.ID.format(user.id))

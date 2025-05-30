@@ -7,4 +7,5 @@ object UserInfoMessage {
     const val BALANCE = "현재 잔액: %d원"
     const val STAMP = "보유 스탬프 개수: %d개"
     const val ORDER_COUNT = "주문 내역 수: %d건"
+    const val PAGE_SEPARATOR = "================================"
 }

@@ -1,6 +1,7 @@
 package view.mypage
 
 object MyPageMessage {
+    const val PAGE_SEPARATOR = "================================"
     const val PAGE_TITLE = "[ 마이페이지 ]"
     const val MENU_CHARGE = "(1) 금액 충전"
     const val MENU_USER_INFO = "(2) 유저 정보 조회"
