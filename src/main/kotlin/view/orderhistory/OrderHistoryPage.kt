@@ -10,7 +10,6 @@ class OrderHistoryPage {
 
         if (user.orderHistory.isEmpty()) {
             println(OrderHistoryMessage.ORDER_HISTORY_EMPTY)
-            println(OrderHistoryMessage.PAGE_SEPARATOR)
             return
         }
 
