@@ -22,14 +22,14 @@ object Input {
             val input = readln().trim()
 
             if (input.isEmpty()) {
-                print("에러 : 아무것도 입력되지 않았습니다. 숫자를 입력해주세요 : ")
+                print(CommonConstants.ERROR_INPUT_NOTHING)
                 continue
             }
 
             if (input.matches(numericRegex)) {
                 return input.toInt()
             } else {
-                print("에러 : 숫자만 입력 가능합니다. 다시 입력해주세요 : ")
+                print(CommonConstants.ERROR_INPUT_ONLY_NUMBER)
             }
         }
     }
@@ -37,7 +37,7 @@ object Input {
     fun inputZeroToMax(maxInput: Int): Int {
         var input = getOnlyNumInput()
         while (input !in 0..maxInput) {
-            print("0 ~ ${maxInput}까지의 숫자를 입력해주세요 : ")
+            print(String.format(CommonConstants.ERROR_INPUT_ZERO_TO_MAX, maxInput))
             input = getOnlyNumInput()
         }
         return input
@@ -46,24 +46,32 @@ object Input {
     fun inputOneToMax(maxInput: Int): Int {
         var input = getOnlyNumInput()
         while (input !in 1..maxInput) {
-            print("1 ~ ${maxInput}까지의 숫자를 입력해주세요 : ")
+            print(String.format(CommonConstants.ERROR_INPUT_ONE_TO_MAX, maxInput))
             input = getOnlyNumInput()
         }
         return input
     }
 
-
     fun getUserIdInput(): String {
         var input = readln()
         while (true) {
-            if (input.isEmpty()) {
-                print("에러 : ID를 입력해주세요. ID 재입력 : ")
-                input = readln()
-            } else if (input.contains(" ")) {
-                print("에러 : ID에 공백을 포함할 수 없습니다. ID 재입력 : ")
-                input = readln()
-            } else {
-                break
+            when {
+                input.equals(CommonConstants.GO_BACK_INPUT) -> {
+                    break
+                }
+                input.isEmpty() -> {
+                    print(CommonConstants.ERROR_INPUT_ID_IS_EMPTY)
+                    input = readln()
+                }
+                input.contains(" ") -> {
+                    print(CommonConstants.ERROR_INPUT_ID_CONTAINS_EMPTY)
+                    input = readln()
+                }
+                input.length < CommonConstants.MIN_ID_LENGTH -> {
+                    print(CommonConstants.ERROR_INPUT_ID_LENGTH)
+                    input = readln()
+                }
+                else -> break
             }
         }
         return input
@@ -72,23 +80,29 @@ object Input {
     fun getUserPwInput(): String {
         var input = readln()
         while (true) {
-            if (input.isEmpty()) {
-                print("에러 : PW를 입력해주세요. PW 재입력 : ")
-                input = readln()
-            } else if (input.contains(" ")) {
-                print("에러 : PW에 공백을 포함할 수 없습니다. PW 재입력 : ")
-                input = readln()
-            } else if (input.length < 4) {
-                print("에러 : PW는 4자리 이상이여야 합니다. PW 재입력 : ")
-                input = readln()
-            } else {
-                break
+            when {
+                input.equals(CommonConstants.GO_BACK_INPUT) -> {
+                    break
+                }
+                input.isEmpty() -> {
+                    print(CommonConstants.ERROR_INPUT_PW_IS_EMPTY)
+                    input = readln()
+                }
+                input.contains(" ") -> {
+                    print(CommonConstants.ERROR_INPUT_PW_CONTAINS_EMPTY)
+                    input = readln()
+                }
+                input.length < CommonConstants.MIN_PW_LENGTH -> {
+                    print(CommonConstants.ERROR_INPUT_PW_LENGTH)
+                    input = readln()
+                }
+                else -> break
             }
         }
         return input
     }
 
     fun printDivLine() {
-        println("====================================================")
+        println(CommonConstants.DIV_LINE)
     }
 }

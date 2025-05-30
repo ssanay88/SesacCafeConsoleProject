@@ -1,5 +1,6 @@
 package view.signup
 
+import common.CommonConstants
 import common.Input
 import common.UserData
 import view.home.HomePage
@@ -15,11 +16,13 @@ class SignupPage {
     fun startSignup() {
         // Id 입력
         print(SignupConstants.ENTER_NEW_ID.trimIndent())
-        var inputNewUserId = readln().trim()
+        var inputNewUserId = Input.getUserIdInput()
+        if (inputNewUserId.equals(CommonConstants.GO_BACK_INPUT)) return
 
         while (signupManager.isUserNameTaken(inputNewUserId)) {
             print(SignupConstants.ENTER_ID_IS_TAKEN)
-            inputNewUserId = readln().trim()
+            inputNewUserId = Input.getUserIdInput()
+            if (inputNewUserId.equals(CommonConstants.GO_BACK_INPUT)) return
         }
 
         // 이름 입력
@@ -28,11 +31,15 @@ class SignupPage {
 
         // PW 입력
         print(SignupConstants.ENTER_NEW_PW)
-        var inputNewUserPw = readln().trim()
+        val inputNewUserPw = Input.getUserPwInput()
+        if (inputNewUserPw.equals(CommonConstants.GO_BACK_INPUT)) return
         print(SignupConstants.ENTER_NEW_PW_REPEAT)
-        while (inputNewUserPw != readln().trim()) {
+        var inputNewUserPwRepeat = Input.getUserPwInput()
+        while (inputNewUserPw != inputNewUserPwRepeat) {
             // 비밀번호 확인 실패
             print(SignupConstants.FAIL_TO_CHECK_PW)
+            inputNewUserPwRepeat = Input.getUserPwInput()
+            if (inputNewUserPwRepeat.equals(CommonConstants.GO_BACK_INPUT)) return
         }
 
         // 신규 유저 등록

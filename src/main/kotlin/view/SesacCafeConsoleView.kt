@@ -10,17 +10,22 @@ object SesacCafeConsoleView {
         [ 새싹 카페 주문 프로그램 실행 ]
         (1) 로그인 
         (2) 신규 회원 가입
+        (0) 프로그램 종료
         원하시는 동작을 입력해주세요 : 
     """
     private const val END_PG_MESSAGE = "새싹 카페 프로그램 종료합니다. 감사합니다."
 
     fun startSesacCafePG() {
-        print(START_PG_MESSAGE.trimIndent())
-        val input = Input.inputOneToMax(2)
-        when (input) {
-            1 -> startLoginPage()
-            2 -> startSignupPage()
-            else -> println(CommonConstants.ERROR_INVALID_INPUT)
+        while (true) {
+            Input.printDivLine()
+            print(START_PG_MESSAGE.trimIndent())
+            val input = Input.inputZeroToMax(2)
+            when (input) {
+                1 -> startLoginPage()
+                2 -> startSignupPage()
+                0 -> break
+                else -> println(CommonConstants.ERROR_INVALID_INPUT)
+            }
         }
         UserDBManager.saveChangesToFile()
         println(END_PG_MESSAGE)

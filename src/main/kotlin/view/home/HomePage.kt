@@ -21,7 +21,7 @@ class HomePage() {
         while (true) {
             val isCartEmpty = CartManager.getItems(nowUser.id).isEmpty()
             if (isCartEmpty) {
-                print(HomeConstants.SHOW_HOME_MENU)
+                print(HomeConstants.SHOW_HOME_MENU.trimIndent())
             } else {
                 print(HomeConstants.SHOW_HOME_MENU_WITH_CART.trimIndent())
             }
