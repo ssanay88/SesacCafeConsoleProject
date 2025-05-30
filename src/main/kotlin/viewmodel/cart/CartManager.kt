@@ -4,7 +4,7 @@ import model.cart.CartItem
 import view.menu.Menu
 
 
-class CartManager {
+object CartManager {
 
     private val userCart = mutableMapOf<String, MutableList<CartItem>>()
 

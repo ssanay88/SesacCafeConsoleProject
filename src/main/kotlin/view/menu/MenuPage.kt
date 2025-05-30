@@ -8,7 +8,6 @@ import viewmodel.cart.CartManager
 
 class MenuPage {
 
-    private val cartManager = CartManager()
     private val menuView = MenuView()
 
     fun startMenuPage(user: UserData) {
@@ -47,7 +46,7 @@ class MenuPage {
 
         when (readLine()) {
             "1" -> {
-                cartManager.addItem(user.id, CartItem(selectedMenu, quantity))
+                CartManager.addItem(user.id, CartItem(selectedMenu, quantity))
                 menuView.printAddedToCartMessage(selectedMenu.menuName, quantity)
 
                 while (true) {
