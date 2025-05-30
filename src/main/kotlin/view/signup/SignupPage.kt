@@ -17,29 +17,29 @@ class SignupPage {
 
     fun startSignup() {
         // Id 입력
-        print(SignupConstants.ENTER_NEW_ID.trimIndent())
+        print(SignupMessage.ENTER_NEW_ID.trimIndent())
         var inputUserId = checkIdInputResult()
         if (inputUserId == CommonConstants.GO_BACK_INPUT) return
 
         while (signupManager.isUserNameTaken(inputUserId)) {
-            print(SignupConstants.ENTER_ID_IS_TAKEN)
+            print(SignupMessage.ENTER_ID_IS_TAKEN)
             inputUserId = checkIdInputResult()
             if (inputUserId == CommonConstants.GO_BACK_INPUT) return
         }
 
         // 이름 입력
-        print(SignupConstants.ENTER_NEW_NAME)
+        print(SignupMessage.ENTER_NEW_NAME)
         val inputNewUserName = readln().trim()
 
         // PW 입력
-        print(SignupConstants.ENTER_NEW_PW)
+        print(SignupMessage.ENTER_NEW_PW)
         val inputNewUserPw = InputView.getUserPwInput()
         if (inputNewUserPw.equals(CommonConstants.GO_BACK_INPUT)) return
-        print(SignupConstants.ENTER_NEW_PW_REPEAT)
+        print(SignupMessage.ENTER_NEW_PW_REPEAT)
         var inputNewUserPwRepeat = InputView.getUserPwInput()
         while (inputNewUserPw != inputNewUserPwRepeat) {
             // 비밀번호 확인 실패
-            print(SignupConstants.FAIL_TO_CHECK_PW)
+            print(SignupMessage.FAIL_TO_CHECK_PW)
             inputNewUserPwRepeat = InputView.getUserPwInput()
             if (inputNewUserPwRepeat.equals(CommonConstants.GO_BACK_INPUT)) return
         }
@@ -49,7 +49,7 @@ class SignupPage {
         signupManager.signupNewUser(newUser)
         // 로그인 정보 저장
         loginManager.loginSuccess(newUser)
-        println(SignupConstants.SIGNUP_SUCCESS_MESSAGE)
+        println(SignupMessage.SIGNUP_SUCCESS_MESSAGE)
         OutputView.printDivLine()
         homePage.startHomePage()
     }
