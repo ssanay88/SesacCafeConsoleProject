@@ -5,7 +5,7 @@ import model.InputResult
 /**
  * 입력에 사용할 함수를 모아둔 파일
  */
-object Input {
+object InputView {
 
     fun getStringInput(text: String): String {
         print(text)
@@ -90,7 +90,4 @@ object Input {
         return input
     }
 
-    fun printDivLine() {
-        println(CommonConstants.DIV_LINE)
-    }
 }

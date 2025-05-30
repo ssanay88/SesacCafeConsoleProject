@@ -21,9 +21,9 @@ object SesacCafeConsoleView {
 
     fun startSesacCafePG() {
         while (true) {
-            Input.printDivLine()
+            OutputView.printDivLine()
             print(START_PG_MESSAGE.trimIndent())
-            val input = Input.inputZeroToMax(2)
+            val input = InputView.inputZeroToMax(2)
             when (input) {
                 1 -> startLoginPage()
                 2 -> startSignupPage()
@@ -36,13 +36,13 @@ object SesacCafeConsoleView {
     }
 
     private fun startLoginPage() {
-        Input.printDivLine()
+        OutputView.printDivLine()
         val loginPage = LoginPage()
         loginPage.startLogin()
     }
 
     private fun startSignupPage() {
-        Input.printDivLine()
+        OutputView.printDivLine()
         val signupPage = SignupPage()
         signupPage.startSignup()
     }

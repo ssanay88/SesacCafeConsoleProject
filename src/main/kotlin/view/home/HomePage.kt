@@ -2,7 +2,7 @@ package view.home
 
 import common.AuthManager
 import common.CommonConstants
-import common.Input
+import common.InputView
 import view.cart.CartPage
 import view.menu.MenuPage
 import view.mypage.MyPage
@@ -26,7 +26,7 @@ class HomePage() {
                 print(HomeConstants.SHOW_HOME_MENU_WITH_CART.trimIndent())
             }
 
-            when (Input.inputZeroToMax(if (isCartEmpty) 3 else 4)) {
+            when (InputView.inputZeroToMax(if (isCartEmpty) 3 else 4)) {
                 1 -> menuPage.startMenuPage(nowUser)
                 2 -> orderPage.startOrderPage(nowUser, CartManager.getItems(nowUser.id))
                 3 -> myPage.startMyPage(nowUser)

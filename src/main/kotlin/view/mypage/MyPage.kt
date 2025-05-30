@@ -1,6 +1,6 @@
 package view.mypage
 
-import common.Input
+import common.InputView
 import view.charge.ChargePage
 import common.UserData
 import view.orderhistory.OrderHistoryPage
@@ -24,7 +24,7 @@ class MyPage {
             println(MyPageMessage.MENU_PASSWORD)
             println(MyPageMessage.MENU_BACK)
 
-            val input = Input.getStringInput(MyPageMessage.INPUT_PROMPT)
+            val input = InputView.getStringInput(MyPageMessage.INPUT_PROMPT)
 
             when (input) {
                 "1" -> chargePage.startChargePage(userData)
