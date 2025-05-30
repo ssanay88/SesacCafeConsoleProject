@@ -24,8 +24,9 @@ class ChangePasswordPage(
         while (true) {
             println(ChangePasswordMessage.INPUT_CURRENT)
             println(ChangePasswordMessage.INPUT_ZERO_BACK)
-            print(ChangePasswordMessage.CURRENT_PROMPT)
-            val input = Input.getStringInput(ChangePasswordMessage.INPUT_CURRENT)
+            println(ChangePasswordMessage.CURRENT_PROMPT)
+
+            val input = Input.getStringInput("")
 
             if (input == "0") {
                 println(ChangePasswordMessage.GOING_BACK)
@@ -45,8 +46,8 @@ class ChangePasswordPage(
         while (true) {
             println(ChangePasswordMessage.INPUT_NEW)
             println(ChangePasswordMessage.INPUT_ZERO_BACK)
-            print(ChangePasswordMessage.NEW_PROMPT)
-            val input = Input.getStringInput(ChangePasswordMessage.INPUT_NEW)
+            println(ChangePasswordMessage.NEW_PROMPT)
+            val input = Input.getStringInput("")
 
             if (input == "0") {
                 println(ChangePasswordMessage.GOING_BACK)
@@ -65,8 +66,8 @@ class ChangePasswordPage(
     private fun confirmPassword(expected: String): Boolean {
         while (true) {
             println(ChangePasswordMessage.INPUT_CONFIRM)
-            print(ChangePasswordMessage.CONFIRM_PROMPT)
-            val input = Input.getStringInput(ChangePasswordMessage.INPUT_CONFIRM)
+            println(ChangePasswordMessage.CONFIRM_PROMPT)
+            val input = Input.getStringInput("")
 
             if (input != expected) {
                 println(ChangePasswordMessage.CONFIRM_NOT_MATCH)
