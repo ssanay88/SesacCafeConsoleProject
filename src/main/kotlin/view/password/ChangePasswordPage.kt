@@ -67,7 +67,7 @@ class ChangePasswordPage(
         while (true) {
             println(ChangePasswordMessage.INPUT_CONFIRM)
 
-            val input = Input.getStringInput(ChangePasswordMessage.CURRENT_PROMPT)
+            val input = Input.getStringInput(ChangePasswordMessage.CONFIRM_PROMPT)
 
             if (input != expected) {
                 println(ChangePasswordMessage.CONFIRM_NOT_MATCH)
