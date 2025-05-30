@@ -12,6 +12,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
     implementation("com.squareup.moshi:moshi:1.15.1")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.1")
 }
