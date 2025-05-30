@@ -1,6 +1,7 @@
 package viewmodel.charge
 
 import common.UserData
+import model.charge.ChargeValidationResult
 
 class ChargeManager(
     private val useCase: ChargeUseCase = ChargeUseCase()
@@ -9,7 +10,7 @@ class ChargeManager(
         useCase.charge(user, amount)
     }
 
-    fun isAmountValid(amount: Int): String? {
+    fun isAmountValid(amount: Int): ChargeValidationResult {
         return useCase.isChargeAmountValid(amount)
     }
 }
