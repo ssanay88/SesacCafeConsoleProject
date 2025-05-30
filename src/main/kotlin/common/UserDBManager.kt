@@ -1,69 +1,74 @@
 package common
 
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.io.File
-import java.time.LocalDateTime
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
 
 /**
  * User Database CURD 처리를 위한 매니저 클래스
  *
- * @constructor Create empty User d b manager
+ * @constructor Create empty User db manager
  */
 
 object UserDBManager {
 
-    const val USER_DB_PATH = "userFile/userDB.json"
-    private val usersInMemory: MutableList<UserData> = mutableListOf()
+    const val USER_DB_PATH = "userFile/userDB.ser"
     private val userDBFile = File(USER_DB_PATH)
-    private val moshi by lazy {
-        Moshi.Builder()
-            .add(LocalDateTime::class.java, LocalDateTimeAdapter)
-            .build()
-    }
-    private val userListAdapter: JsonAdapter<List<UserData>> = moshi.adapter(
-        Types.newParameterizedType(List::class.java, UserData::class.java)
-    )
+    private val usersInMemory: MutableList<UserData> = mutableListOf()
 
-    init {
+    fun init() {
         loadUsersFromFile()
     }
 
-    private fun loadUsersFromFile() {
-        runCatching {
-            if (!userDBFile.exists()) {
-                userDBFile.createNewFile()
-                userDBFile.writeText("[]") // 빈 JSON 배열로 초기화
-                usersInMemory.clear()
-                return
-            }
+    private fun loadUsersFromFile() = runBlocking {
+        launch(Dispatchers.IO) {
+            runCatching {
+                if (!userDBFile.exists()) {
+                    userDBFile.createNewFile()
+                    ObjectOutputStream(FileOutputStream(USER_DB_PATH)).use {
+                        it.writeObject(mutableListOf<UserData>())
+                    }
+                    usersInMemory.clear()
+                }
 
-            if (userDBFile.length() == 0L) {
-                userDBFile.writeText("[]") // 깔끔하게 빈 JSON 배열로 덮어쓰기
-                usersInMemory.clear()
-                return
-            }
+                if (userDBFile.length() == 0L) {
+                    userDBFile.createNewFile()
+                    ObjectOutputStream(FileOutputStream(USER_DB_PATH)).use {
+                        it.writeObject(mutableListOf<UserData>())
+                    }
+                    usersInMemory.clear()
+                }
 
-            val fileContent = userDBFile.readText() // 파일 내용을 문자열로 읽기
-            val loadedUsers = userListAdapter.fromJson(fileContent) // Moshi로 역직렬화
-            // 불러온 데이터가 null이 아닐 경우에만 추가
-            usersInMemory.addAll(loadedUsers ?: emptyList())
-        }.onSuccess {
-            println("파일 불러오기 성공")
-        }.onFailure {
-            println("파일 불러오기 실패")
+                ObjectInputStream(FileInputStream(USER_DB_PATH)).use {
+                    usersInMemory.addAll(it.readObject() as List<UserData>)
+                    println(usersInMemory)
+                }
+
+            }.onSuccess {
+                println(CommonConstants.SUCCESS_LOAD_FILE)
+            }.onFailure {
+                println(CommonConstants.FAIL_LOAD_FILE)
+            }
         }
+
     }
 
-    fun saveChangesToFile() {
-        runCatching {
-            val json = userListAdapter.toJson(usersInMemory) // Moshi로 직렬화
-            userDBFile.writeText(json) // JSON 문자열을 파일에 쓰기
-        }.onSuccess {
-            println("파일 저장하기 성공")
-        }.onFailure {
-            println("파일 저장하기 실패")
+    fun saveChangesToFile() = runBlocking {
+        launch(Dispatchers.IO) {
+            runCatching {
+                ObjectOutputStream(FileOutputStream(USER_DB_PATH)).use {
+                    it.writeObject(usersInMemory)
+                }
+            }.onSuccess {
+                println(CommonConstants.SUCCESS_SAVE_FILE)
+            }.onFailure {
+                println(CommonConstants.FAIL_SAVE_FILE)
+            }
         }
     }
 

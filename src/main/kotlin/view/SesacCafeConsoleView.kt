@@ -15,6 +15,10 @@ object SesacCafeConsoleView {
     """
     private const val END_PG_MESSAGE = "새싹 카페 프로그램 종료합니다. 감사합니다."
 
+    init {
+        UserDBManager.init()
+    }
+
     fun startSesacCafePG() {
         while (true) {
             Input.printDivLine()
@@ -31,13 +35,13 @@ object SesacCafeConsoleView {
         println(END_PG_MESSAGE)
     }
 
-    fun startLoginPage() {
+    private fun startLoginPage() {
         Input.printDivLine()
         val loginPage = LoginPage()
         loginPage.startLogin()
     }
 
-    fun startSignupPage() {
+    private fun startSignupPage() {
         Input.printDivLine()
         val signupPage = SignupPage()
         signupPage.startSignup()
