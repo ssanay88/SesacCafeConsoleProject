@@ -16,6 +16,7 @@ class MyPage {
 
     fun startMyPage(userData: UserData) {
         while (true) {
+            println(MyPageMessage.PAGE_SEPARATOR)
             println(MyPageMessage.PAGE_TITLE)
             println(MyPageMessage.MENU_CHARGE)
             println(MyPageMessage.MENU_USER_INFO)

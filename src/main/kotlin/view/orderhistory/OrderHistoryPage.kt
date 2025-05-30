@@ -5,10 +5,12 @@ import common.UserData
 class OrderHistoryPage {
 
     fun startOrderHistoryPage(user: UserData) {
+        println(OrderHistoryMessage.PAGE_SEPARATOR)
         println(OrderHistoryMessage.ORDER_HISTORY_PAGE_TITLE)
 
         if (user.orderHistory.isEmpty()) {
             println(OrderHistoryMessage.ORDER_HISTORY_EMPTY)
+            println(OrderHistoryMessage.PAGE_SEPARATOR)
             return
         }
 
@@ -19,7 +21,9 @@ class OrderHistoryPage {
             order.orderItems.forEach {
                 println("${it.menuName} x ${it.quantity}")
             }
-            println(OrderHistoryMessage.ORDER_SEPARATOR)
+            if (user.orderHistory.size > 1 && index != user.orderHistory.lastIndex) {
+                println(OrderHistoryMessage.ORDER_SEPARATOR)
+            }
         }
     }
 }

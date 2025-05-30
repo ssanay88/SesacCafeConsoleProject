@@ -9,6 +9,7 @@ class ChargePage(
     private val chargeManager: ChargeManager = ChargeManager()
 ) {
     fun startChargePage(user: UserData) {
+        println(ChargeMessage.PAGE_SEPARATOR)
         println(ChargeMessage.CHARGE_PAGE_TITLE)
 
         while (true) {
