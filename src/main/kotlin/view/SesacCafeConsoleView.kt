@@ -14,6 +14,10 @@ object SesacCafeConsoleView {
     """
     private const val END_PG_MESSAGE = "새싹 카페 프로그램 종료합니다. 감사합니다."
 
+    init {
+        UserDBManager.init()
+    }
+
     fun startSesacCafePG() {
         print(START_PG_MESSAGE.trimIndent())
         val input = Input.inputOneToMax(2)
