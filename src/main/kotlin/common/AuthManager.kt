@@ -92,12 +92,12 @@ object AuthManager {
 
     fun printLoginUserInfo() {
         println("""
+            -----------------------------------------------
             이름 : ${_currentUser?.name}
             ID : ${_currentUser?.id}
-            PW : ${_currentUser?.password}
-            Balance : ${_currentUser?.balance}
-            OrderHistory : ${_currentUser?.orderHistory}
+            Balance : ${_currentUser?.balance}원
             Stamp : ${_currentUser?.stamp}
+            -----------------------------------------------
         """.trimIndent())
     }
 
