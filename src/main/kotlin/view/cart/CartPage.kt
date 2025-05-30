@@ -26,7 +26,7 @@ class CartPage {
                 println()
             }
 
-            println(CartMessage.CART_OPTIONS)
+            println(CartMessage.CART_OPTIONS.trimIndent())
 
             when (readLine()) {
                 "1" -> {

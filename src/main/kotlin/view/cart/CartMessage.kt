@@ -11,6 +11,7 @@ object CartMessage {
         (3) 선택 메뉴 삭제
         (4) 전체 메뉴 삭제
         (0) 이전 화면으로 돌아가기
+        원하시는 기능을 선택해주세요 : 
     """
     const val GOING_BACK = "이전 화면으로 돌아갑니다."
     const val ORDER_COMPLETE = "주문이 완료되었습니다."
