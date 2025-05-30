@@ -1,6 +1,7 @@
 package view.orderhistory
 
 object OrderHistoryMessage {
+    const val PAGE_SEPARATOR = "================================"
     const val ORDER_HISTORY_PAGE_TITLE = "[ 주문 내역 조회 페이지 ]"
     const val ORDER_HISTORY_EMPTY = "주문 내역이 없습니다."
     const val ORDER_NUMBER_PREFIX = "[%d] 주문번호: %s"

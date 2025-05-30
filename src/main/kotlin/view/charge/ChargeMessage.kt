@@ -1,6 +1,7 @@
 package view.charge
 
 object ChargeMessage {
+    const val PAGE_SEPARATOR = "================================"
     const val CHARGE_PAGE_TITLE = "[ 금액 충전 페이지 ]"
     const val CHARGE_GUIDE = "충전하실 금액을 입력해주세요. (최소금액: 5000원, 최대금액: 50000원)"
     const val GO_BACK_GUIDE = "(0)을 입력하면 이전 메뉴로 돌아갑니다."
