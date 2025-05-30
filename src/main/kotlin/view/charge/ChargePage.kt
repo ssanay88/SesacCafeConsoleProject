@@ -2,6 +2,7 @@ package view.charge
 
 import common.Input
 import common.UserData
+import model.charge.ChargeValidationResult
 import viewmodel.charge.ChargeManager
 
 
@@ -29,12 +30,15 @@ class ChargePage(
                 continue
             }
 
-            val validation = chargeManager.isAmountValid(amount)
-            if (validation != null) {
-                println(validation)
-                continue
+            when(val validation = chargeManager.isAmountValid(amount)) {
+                is ChargeValidationResult.Invalid -> {
+                    println(validation.message)
+                    continue
+                }
+                ChargeValidationResult.Valid -> {
+                    println("충전 중...")
+                }
             }
-
             chargeManager.charge(user, amount)
             println(ChargeMessage.CHARGE_COMPLETE.format(amount))
             println(ChargeMessage.CURRENT_BALANCE.format(user.balance))
