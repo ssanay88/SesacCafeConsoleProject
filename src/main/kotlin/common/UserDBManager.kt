@@ -1,5 +1,6 @@
 package common
 
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -71,6 +72,7 @@ object UserDBManager {
             }
         }
     }
+
 
     // 새로운 유저 데이터를 DB에 추가하는 함수
     fun addUser(user: UserData) {

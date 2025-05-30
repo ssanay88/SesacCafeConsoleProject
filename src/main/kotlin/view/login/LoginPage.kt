@@ -15,6 +15,9 @@ class LoginPage {
     fun startLogin() {
         // 로그인 시작 텍스트 출력
         print(LoginConstants.ENTER_ID.trimIndent())
+        while (true) {
+            when ()
+        }
         var inputUserId = Input.getUserIdInput()
         if (inputUserId.equals(CommonConstants.GO_BACK_INPUT)) return
         // ID 입력 및 확인
