@@ -4,6 +4,7 @@ import model.cart.CartItem
 import common.UserData
 import model.order.Order
 import model.order.OrderItem
+import view.charge.ChargePage
 import viewmodel.cart.CartManager
 import viewmodel.order.OrderManager
 
@@ -11,6 +12,7 @@ class OrderPage{
 
     private val orderView = OrderView()
     private val orderManager = OrderManager()
+    private val chargePage = ChargePage()
 
     fun startOrderPage(user: UserData, items: List<CartItem>) {
         if (items.isEmpty()) {
@@ -37,6 +39,7 @@ class OrderPage{
 
         if (user.balance < amountToPay) {
             orderView.printNotEnoughBalanceMessage()
+            chargePage.startChargePage(user)
             return
         }
 
