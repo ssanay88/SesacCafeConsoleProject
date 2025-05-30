@@ -6,83 +6,83 @@ import viewmodel.cart.CartManager
 
 class CartPage {
 
-    //private val cartManager = CartManager()
-    private val cartView =  CartView()
-
     fun startCartPage(user: UserData) {
         while(true) {
             val cartItems = CartManager.getItems(user.id)
-            cartView.printEnterCartUI()
+            println(CartMessage.CART_PAGE_TITLE)
 
             if (cartItems.isEmpty()) {
-                cartView.printCartEmptyMessage()
+                println(CartMessage.CART_EMPTY)
                 return
             }
 
             val grouped = cartItems.groupBy { it.addedTime.toLocalDate() }
             grouped.forEach { (date, items) ->
-                cartView.printCartDate(date.toString())
+                println(String.format(CartMessage.CART_DATE, date.toString()))
                 items.forEachIndexed { index, item ->
                     val total = item.menu.price * item.quantity
-                    cartView.printCartItem(index + 1, item.menu.menuName, item.menu.price, item.quantity, total)
+                    println(String.format(CartMessage.CART_ITEM, index + 1, item.menu.menuName, item.menu.price, item.quantity, total))
                 }
                 println()
             }
 
-            cartView.printCartOptions()
+            println(CartMessage.CART_OPTIONS)
 
             when (readLine()) {
                 "1" -> {
                     OrderPage().startOrderPage(user, cartItems)
-                    cartView.printOrderCompleteMessage()
+                    println(CartMessage.ORDER_COMPLETE)
                     return
                 }
 
                 "2" -> {
-                    cartView.printQuantityChangeUI()
+                    println(CartMessage.QUANTITY_CHANGE_GUIDE)
                     val input = readLine()?.toIntOrNull()
                     if (input == null || input !in 1..cartItems.size) {
-                        cartView.printInvalidInputMessage()
+                        println(CartMessage.INVALID_INPUT)
                         continue
                     }
 
-                    cartView.printQuantityInputUI()
+                    println(CartMessage.INPUT_NEW_QUANTITY)
                     val newQty = readLine()?.toIntOrNull()
                     if (newQty == null || newQty !in 1..9) {
-                        cartView.printInvalidInputMessage()
+                        println(CartMessage.INVALID_INPUT)
                         continue
                     }
 
                     val menu = cartItems[input - 1].menu
                     CartManager.updateQuantity(user.id, menu, newQty)
-                    cartView.printQuantityChangedMessage(menu.menuName, newQty)
+                    println(String.format(CartMessage.QUANTITY_CHANGE, menu.menuName, newQty))
                 }
 
                 "3" -> {
-                    cartView.printDeleteItemUI()
+                    println(CartMessage.DELETE_ITEM_INPUT)
                     val input = readLine()?.toIntOrNull()
                     if (input == null || input !in 1..cartItems.size) {
-                        cartView.printInvalidInputMessage()
+                        println(CartMessage.INVALID_INPUT)
                         continue
                     }
 
                     val menu = cartItems[input - 1].menu
                     CartManager.removeItem(user.id, menu)
-                    cartView.printItemRemovedMessage(menu.menuName)
+                    println(String.format(CartMessage.ITEM_REMOVE, menu.menuName))
                 }
 
                 "4" -> {
-                    cartView.printClearCartConfirmationUI()
+                    println(CartMessage.CLEAR_CART_CONFIRM)
                     if (readLine()?.uppercase() == "Y") {
                         CartManager.clear(user.id)
-                        cartView.printCartClearedMessage()
+                        println(CartMessage.CART_CLEARED)
                         return
                     }
                 }
 
-                "-1" -> return
+                "0" -> {
+                    println(CartMessage.GOING_BACK)
+                    return
+                }
 
-                else -> cartView.printInvalidInputMessage()
+                else -> println(CartMessage.INVALID_INPUT)
             }
         }
     }
