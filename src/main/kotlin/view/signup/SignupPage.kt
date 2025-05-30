@@ -14,7 +14,7 @@ class SignupPage {
 
     fun startSignup() {
         // Id 입력
-        print(SignupConstants.ENTER_NEW_ID)
+        print(SignupConstants.ENTER_NEW_ID.trimIndent())
         var inputNewUserId = readln().trim()
 
         while (signupManager.isUserNameTaken(inputNewUserId)) {

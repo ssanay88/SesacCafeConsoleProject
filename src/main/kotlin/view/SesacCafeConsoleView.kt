@@ -24,15 +24,16 @@ object SesacCafeConsoleView {
         }
         UserDBManager.saveChangesToFile()
         println(END_PG_MESSAGE)
-        Input.printDivLine()
     }
 
     fun startLoginPage() {
+        Input.printDivLine()
         val loginPage = LoginPage()
         loginPage.startLogin()
     }
 
     fun startSignupPage() {
+        Input.printDivLine()
         val signupPage = SignupPage()
         signupPage.startSignup()
     }

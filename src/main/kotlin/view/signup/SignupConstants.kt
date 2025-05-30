@@ -3,7 +3,7 @@ package view.signup
 object SignupConstants {
     const val ENTER_NEW_ID = """
     [ 회원가입 페이지 ]
-    사용할 ID 입력 :
+    사용할 ID 입력 : 
     """
     const val ENTER_ID_IS_TAKEN = "이미 사용중인 ID 입니다. 다른 ID를 입력해주세요 : "
     const val ENTER_NEW_PW = "사용할 PW 입력 : "
