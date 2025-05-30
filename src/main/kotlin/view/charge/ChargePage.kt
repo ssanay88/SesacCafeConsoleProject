@@ -1,6 +1,6 @@
 package view.charge
 
-import common.Input
+import common.InputView
 import common.UserData
 import model.charge.ChargeValidationResult
 import viewmodel.charge.ChargeManager
@@ -17,7 +17,7 @@ class ChargePage(
             println(ChargeMessage.CHARGE_GUIDE)
             println(ChargeMessage.GO_BACK_GUIDE)
 
-            val input = Input.getStringInput(ChargeMessage.CHARGE_INPUT_PROMPT)
+            val input = InputView.getStringInput(ChargeMessage.CHARGE_INPUT_PROMPT)
 
             if (input == ChargeMessage.ZERO) {
                 println(ChargeMessage.GOING_BACK)

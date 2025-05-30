@@ -1,7 +1,7 @@
 package view.signup
 
 import common.CommonConstants
-import common.Input
+import common.InputView
 import common.UserData
 import view.home.HomePage
 import viewmodel.login.LoginManager
@@ -16,12 +16,12 @@ class SignupPage {
     fun startSignup() {
         // Id 입력
         print(SignupConstants.ENTER_NEW_ID.trimIndent())
-        var inputNewUserId = Input.getUserIdInput()
+        var inputNewUserId = InputView.getUserIdInput()
         if (inputNewUserId.equals(CommonConstants.GO_BACK_INPUT)) return
 
         while (signupManager.isUserNameTaken(inputNewUserId)) {
             print(SignupConstants.ENTER_ID_IS_TAKEN)
-            inputNewUserId = Input.getUserIdInput()
+            inputNewUserId = InputView.getUserIdInput()
             if (inputNewUserId.equals(CommonConstants.GO_BACK_INPUT)) return
         }
 
@@ -31,14 +31,14 @@ class SignupPage {
 
         // PW 입력
         print(SignupConstants.ENTER_NEW_PW)
-        val inputNewUserPw = Input.getUserPwInput()
+        val inputNewUserPw = InputView.getUserPwInput()
         if (inputNewUserPw.equals(CommonConstants.GO_BACK_INPUT)) return
         print(SignupConstants.ENTER_NEW_PW_REPEAT)
-        var inputNewUserPwRepeat = Input.getUserPwInput()
+        var inputNewUserPwRepeat = InputView.getUserPwInput()
         while (inputNewUserPw != inputNewUserPwRepeat) {
             // 비밀번호 확인 실패
             print(SignupConstants.FAIL_TO_CHECK_PW)
-            inputNewUserPwRepeat = Input.getUserPwInput()
+            inputNewUserPwRepeat = InputView.getUserPwInput()
             if (inputNewUserPwRepeat.equals(CommonConstants.GO_BACK_INPUT)) return
         }
 
@@ -48,7 +48,7 @@ class SignupPage {
         // 로그인 정보 저장
         loginManager.loginSuccess(newUser)
         println(SignupConstants.SIGNUP_SUCCESS_MESSAGE)
-        Input.printDivLine()
+        OutputView.printDivLine()
         homePage.startHomePage()
     }
 }
