@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.1.10"
+    kotlin("kapt") version "2.1.10"
 }
 
 group = "project.sesaccafe"
@@ -11,7 +12,8 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.squareup.moshi:moshi:1.15.1")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.1")
 }
 
 tasks.test {

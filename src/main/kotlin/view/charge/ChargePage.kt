@@ -4,6 +4,7 @@ import common.Input
 import common.UserData
 import viewmodel.charge.ChargeManager
 
+
 class ChargePage(
     private val chargeManager: ChargeManager = ChargeManager()
 ) {
