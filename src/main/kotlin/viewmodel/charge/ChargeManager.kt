@@ -2,7 +2,7 @@ package viewmodel.charge
 
 import common.UserData
 
-class ChargeViewModel(
+class ChargeManager(
     private val useCase: ChargeUseCase = ChargeUseCase()
 ) {
     fun charge(user: UserData, amount: Int) {

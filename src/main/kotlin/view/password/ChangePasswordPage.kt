@@ -1,10 +1,11 @@
 package view.password
 
+import common.Input
 import common.UserData
-import viewmodel.password.ChangePasswordViewModel
+import viewmodel.password.ChangePasswordManager
 
 class ChangePasswordPage(
-    private val viewModel: ChangePasswordViewModel = ChangePasswordViewModel()
+    private val changePasswordManager: ChangePasswordManager = ChangePasswordManager()
 ) {
     fun startChangePasswordPage(user: UserData) {
         println(ChangePasswordMessage.PAGE_TITLE)
@@ -15,7 +16,7 @@ class ChangePasswordPage(
 
         if (!confirmPassword(newPassword)) return
 
-        viewModel.changePassword(user, newPassword)
+        changePasswordManager.changePassword(user, newPassword)
         println(ChangePasswordMessage.CHANGE_SUCCESS)
     }
 
@@ -24,7 +25,7 @@ class ChangePasswordPage(
             println(ChangePasswordMessage.INPUT_CURRENT)
             println(ChangePasswordMessage.INPUT_ZERO_BACK)
             print(ChangePasswordMessage.CURRENT_PROMPT)
-            val input = readln().trim()
+            val input = Input.getStringInput(ChangePasswordMessage.INPUT_CURRENT)
 
             if (input == "0") {
                 println(ChangePasswordMessage.GOING_BACK)
@@ -45,7 +46,7 @@ class ChangePasswordPage(
             println(ChangePasswordMessage.INPUT_NEW)
             println(ChangePasswordMessage.INPUT_ZERO_BACK)
             print(ChangePasswordMessage.NEW_PROMPT)
-            val input = readln().trim()
+            val input = Input.getStringInput(ChangePasswordMessage.INPUT_NEW)
 
             if (input == "0") {
                 println(ChangePasswordMessage.GOING_BACK)
@@ -65,7 +66,7 @@ class ChangePasswordPage(
         while (true) {
             println(ChangePasswordMessage.INPUT_CONFIRM)
             print(ChangePasswordMessage.CONFIRM_PROMPT)
-            val input = readln().trim()
+            val input = Input.getStringInput(ChangePasswordMessage.INPUT_CONFIRM)
 
             if (input != expected) {
                 println(ChangePasswordMessage.CONFIRM_NOT_MATCH)

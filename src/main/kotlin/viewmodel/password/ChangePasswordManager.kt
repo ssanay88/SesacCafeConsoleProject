@@ -2,7 +2,7 @@ package viewmodel.password
 
 import common.UserData
 
-class ChangePasswordViewModel(
+class ChangePasswordManager(
     private val useCase: ChangePasswordUseCase = ChangePasswordUseCase()
 ) {
     fun changePassword(user: UserData, newPassword: String) {

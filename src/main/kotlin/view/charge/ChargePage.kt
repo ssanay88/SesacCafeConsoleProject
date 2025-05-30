@@ -1,11 +1,12 @@
 package view.charge
 
-import common.Input.getStringInput
+import common.Input
 import common.UserData
-import viewmodel.charge.ChargeViewModel
+import viewmodel.charge.ChargeManager
+
 
 class ChargePage(
-    private val viewModel: ChargeViewModel = ChargeViewModel()
+    private val chargeManager: ChargeManager = ChargeManager()
 ) {
     fun startChargePage(user: UserData) {
         println(ChargeMessage.CHARGE_PAGE_TITLE)
@@ -14,9 +15,9 @@ class ChargePage(
             println(ChargeMessage.CHARGE_GUIDE)
             println(ChargeMessage.GO_BACK_GUIDE)
 
-            val input = getStringInput(ChargeMessage.CHARGE_INPUT_PROMPT)
+            val input = Input.getStringInput(ChargeMessage.CHARGE_INPUT_PROMPT)
 
-            if (input == "0") {
+            if (input == ChargeMessage.ZERO) {
                 println(ChargeMessage.GOING_BACK)
                 break
             }
@@ -27,13 +28,13 @@ class ChargePage(
                 continue
             }
 
-            val validation = viewModel.isAmountValid(amount)
+            val validation = chargeManager.isAmountValid(amount)
             if (validation != null) {
                 println(validation)
                 continue
             }
 
-            viewModel.charge(user, amount)
+            chargeManager.charge(user, amount)
             println(ChargeMessage.CHARGE_COMPLETE.format(amount))
             println(ChargeMessage.CURRENT_BALANCE.format(user.balance))
             return

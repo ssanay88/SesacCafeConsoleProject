@@ -11,4 +11,5 @@ object ChargeMessage {
     const val CURRENT_BALANCE = "현재 잔액: %d원"
     const val AMOUNT_TOO_LOW = "최소 충전 금액은 5000원 입니다."
     const val AMOUNT_TOO_HIGH = "최대 충전 금액은 50000원 입니다."
+    const val ZERO = "0"
 }
