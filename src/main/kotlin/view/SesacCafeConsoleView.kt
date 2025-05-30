@@ -1,6 +1,9 @@
 package view
 
 import common.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import view.login.LoginPage
 import view.signup.SignupPage
 
@@ -16,10 +19,13 @@ object SesacCafeConsoleView {
     private const val END_PG_MESSAGE = " 👋 새싹 카페 프로그램 종료합니다. 감사합니다. 👋 "
 
     init {
-        UserDBManager.init()
+        CoroutineScope(Dispatchers.IO).launch {
+            UserDBManager.loadUsersFromFile()
+        }
     }
 
-    fun startSesacCafePG() {
+
+    suspend fun startSesacCafePG() {
         while (true) {
             OutputView.printDivLine()
             print(START_PG_MESSAGE.trimIndent())
@@ -31,8 +37,14 @@ object SesacCafeConsoleView {
                 else -> println(CommonConstants.ERROR_INVALID_INPUT)
             }
         }
-        UserDBManager.saveChangesToFile()
+
+        saveChangesToFile().join()
+
         println(END_PG_MESSAGE)
+    }
+
+    private fun saveChangesToFile() =  CoroutineScope(Dispatchers.IO).launch {
+        UserDBManager.saveChangesToFile()
     }
 
     private fun startLoginPage() {
