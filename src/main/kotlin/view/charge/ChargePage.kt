@@ -36,10 +36,9 @@ class ChargePage(
                     continue
                 }
                 ChargeValidationResult.Valid -> {
-                    println("충전 중...")
+                    chargeManager.charge(user, amount)
                 }
             }
-            chargeManager.charge(user, amount)
             println(ChargeMessage.CHARGE_COMPLETE.format(amount))
             println(ChargeMessage.CURRENT_BALANCE.format(user.balance))
             return
