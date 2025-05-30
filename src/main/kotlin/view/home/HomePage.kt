@@ -21,9 +21,9 @@ class HomePage() {
         while (true) {
             val isCartEmpty = CartManager.getItems(nowUser.id).isEmpty()
             if (isCartEmpty) {
-                print(HomeConstants.SHOW_HOME_MENU.trimIndent())
+                print(HomeMessage.SHOW_HOME_MENU.trimIndent())
             } else {
-                print(HomeConstants.SHOW_HOME_MENU_WITH_CART.trimIndent())
+                print(HomeMessage.SHOW_HOME_MENU_WITH_CART.trimIndent())
             }
 
             when (InputView.inputZeroToMax(if (isCartEmpty) 3 else 4)) {

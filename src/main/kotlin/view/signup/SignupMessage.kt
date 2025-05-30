@@ -1,6 +1,6 @@
 package view.signup
 
-object SignupConstants {
+object SignupMessage {
     const val ENTER_NEW_ID = """
     [ 회원가입 페이지 ]
     사용할 ID 입력 (뒤로 가기 - 0번 입력) : 

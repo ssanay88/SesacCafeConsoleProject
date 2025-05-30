@@ -1,6 +1,7 @@
+import kotlinx.coroutines.runBlocking
 import view.SesacCafeConsoleView
 
-fun main() {
+fun main() = runBlocking {
     SesacCafeConsoleView.startSesacCafePG()
 }
 

@@ -1,6 +1,6 @@
 package view.login
 
-object LoginConstants {
+object LoginMessage {
     const val ENTER_ID = """
     [ 로그인 페이지 ]
     ID 입력 (뒤로 가기 - 0번 입력) : 

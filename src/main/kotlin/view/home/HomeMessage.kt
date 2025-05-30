@@ -1,6 +1,6 @@
 package view.home
 
-object HomeConstants {
+object HomeMessage {
     const val SHOW_HOME_MENU = """
     [ 메인 페이지 ]
     (1) 메뉴 페이지로 이동

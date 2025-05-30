@@ -1,5 +1,8 @@
 package common
 
+import model.InputResult
+import view.ConsoleInput
+
 /**
  * 입력에 사용할 함수를 모아둔 파일
  */
@@ -52,36 +55,22 @@ object InputView {
         return input
     }
 
-    fun getUserIdInput(): String {
-        var input = readln()
-        while (true) {
-            when {
-                input.equals(CommonConstants.GO_BACK_INPUT) -> {
-                    break
-                }
-                input.isEmpty() -> {
-                    print(CommonConstants.ERROR_INPUT_ID_IS_EMPTY)
-                    input = readln()
-                }
-                input.contains(" ") -> {
-                    print(CommonConstants.ERROR_INPUT_ID_CONTAINS_EMPTY)
-                    input = readln()
-                }
-                input.length < CommonConstants.MIN_ID_LENGTH -> {
-                    print(CommonConstants.ERROR_INPUT_ID_LENGTH)
-                    input = readln()
-                }
-                else -> break
-            }
+    fun getUserIdInput(): InputResult {
+        val input = ConsoleInput.consoleReadLine().trim()
+        return when {
+            input == CommonConstants.GO_BACK_INPUT -> InputResult.GoBack(CommonConstants.GO_BACK_INPUT)
+            input.isEmpty() -> InputResult.InputIsEmpty(CommonConstants.ERROR_INPUT_ID_IS_EMPTY)
+            input.contains(" ") -> InputResult.InputContainsEmpty(CommonConstants.ERROR_INPUT_ID_CONTAINS_EMPTY)
+            input.length < CommonConstants.MIN_ID_LENGTH -> InputResult.InputIsShort(CommonConstants.ERROR_INPUT_ID_LENGTH)
+            else -> InputResult.Success(input)
         }
-        return input
     }
 
     fun getUserPwInput(): String {
         var input = readln()
         while (true) {
             when {
-                input.equals(CommonConstants.GO_BACK_INPUT) -> {
+                input == CommonConstants.GO_BACK_INPUT -> {
                     break
                 }
                 input.isEmpty() -> {

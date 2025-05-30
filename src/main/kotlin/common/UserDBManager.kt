@@ -1,8 +1,6 @@
 package common
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -21,12 +19,8 @@ object UserDBManager {
     private val userDBFile = File(USER_DB_PATH)
     private val usersInMemory: MutableList<UserData> = mutableListOf()
 
-    fun init() {
-        loadUsersFromFile()
-    }
-
-    private fun loadUsersFromFile() = runBlocking {
-        launch(Dispatchers.IO) {
+    suspend fun loadUsersFromFile() {
+        withContext(Dispatchers.IO) {
             runCatching {
                 if (!userDBFile.exists()) {
                     userDBFile.createNewFile()
@@ -46,20 +40,18 @@ object UserDBManager {
 
                 ObjectInputStream(FileInputStream(USER_DB_PATH)).use {
                     usersInMemory.addAll(it.readObject() as List<UserData>)
-                    println(usersInMemory)
                 }
 
             }.onSuccess {
-                println(CommonConstants.SUCCESS_LOAD_FILE)
+                // println(CommonConstants.SUCCESS_LOAD_FILE)
             }.onFailure {
-                println(CommonConstants.FAIL_LOAD_FILE)
+                // println(CommonConstants.FAIL_LOAD_FILE)
             }
         }
-
     }
 
-    fun saveChangesToFile() = runBlocking {
-        launch(Dispatchers.IO) {
+    suspend fun saveChangesToFile() {
+        withContext(Dispatchers.IO) {
             runCatching {
                 ObjectOutputStream(FileOutputStream(USER_DB_PATH)).use {
                     it.writeObject(usersInMemory)
@@ -71,6 +63,7 @@ object UserDBManager {
             }
         }
     }
+
 
     // 새로운 유저 데이터를 DB에 추가하는 함수
     fun addUser(user: UserData) {

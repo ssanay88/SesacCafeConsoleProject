@@ -3,7 +3,7 @@ package view
 import java.util.Scanner
 
 class ConsoleInput {
-    companion object{
+    companion object {
         private lateinit var scanner: Scanner
         fun consoleReadLine() : String {
             if(!this::scanner.isInitialized){
