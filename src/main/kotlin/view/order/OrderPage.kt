@@ -8,7 +8,7 @@ import view.charge.ChargePage
 import viewmodel.cart.CartManager
 import viewmodel.order.OrderManager
 
-class OrderPage{
+class OrderPage {
 
     private val orderView = OrderView()
     private val orderManager = OrderManager()
@@ -20,48 +20,55 @@ class OrderPage{
             return
         }
 
-        val totalAmount = items.sumOf { it.menu.price * it.quantity }
+        while (true) {
+            val totalAmount = items.sumOf { it.menu.price * it.quantity }
 
-        orderView.printOrderPageUI(totalAmount, user)
+            var discount = 0
+            var amountToPay = totalAmount
 
-        var userPoint = 0
-        var amountToPay = totalAmount
-
-        if (user.stamp > 0) {
-            if (orderView.printAskUsePointsUI()) {
-                userPoint = if (user.stamp >= totalAmount) totalAmount else user.stamp
-                amountToPay -= userPoint
-                orderView.printUsingPointsMessage(userPoint)
-            } else {
-                orderView.printNotUsingPointsMessage()
+            // 사용자에게 스탬프 사용할지 물어보기
+            if (user.stamp >= 10) {
+                if (orderView.printAskUsePointsUI()) {
+                    discount = 5000
+                    amountToPay -= discount
+                    orderView.printUsingPointsMessage(discount)
+                } else {
+                    orderView.printNotUsingPointsMessage()
+                }
             }
-        }
 
-        if (user.balance < amountToPay) {
-            orderView.printNotEnoughBalanceMessage()
-            chargePage.startChargePage(user)
+            // [주문 페이지]
+            orderView.printOrderPageUI(amountToPay, user)
+
+            // 잔액 부족 시 충전 페이지 이동 후 다시 반복
+            if (user.balance < amountToPay) {
+                orderView.printNotEnoughBalanceMessage()
+                chargePage.startChargePage(user)
+                continue
+            }
+
+            // 결제 진행
+            user.balance -= amountToPay
+            if (discount == 5000) user.stamp -= 10
+            CartManager.clear(user.id)
+
+            val orderItems = items.map { cartItem ->
+                OrderItem(
+                    menuId = cartItem.menu.menuName,
+                    menuName = cartItem.menu.menuName,
+                    quantity = cartItem.quantity
+                )
+            }
+
+            val order = Order(orderItems = orderItems)
+
+            orderManager.apply {
+                saveOrder(user, order)
+                addStamp(user)
+            }
+
+            orderView.printOrderCompleteMessage(amountToPay, user)
             return
         }
-
-        user.stamp -= userPoint
-        user.balance -= amountToPay
-        CartManager.clear(user.id)
-
-        val orderItems = items.map { cartItem ->
-            OrderItem(
-                menuId = cartItem.menu.menuName,
-                menuName = cartItem.menu.menuName,
-                quantity = cartItem.quantity
-            )
-        }
-
-        val order = Order(orderItems = orderItems)
-
-        orderManager.apply {
-            saveOrder(user, order)
-            addStamp(user)
-        }
-
-        orderView.printOrderCompleteMessage(userPoint, amountToPay, user)
     }
 }
