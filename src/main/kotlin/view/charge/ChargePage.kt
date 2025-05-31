@@ -1,6 +1,8 @@
 package view.charge
 
+import common.CommonConstants
 import common.InputView
+import common.OutputView.printDivLine
 import common.UserData
 import model.charge.ChargeValidationResult
 import viewmodel.charge.ChargeManager
@@ -9,7 +11,7 @@ class ChargePage(
     private val chargeManager: ChargeManager = ChargeManager()
 ) {
     fun startChargePage(user: UserData) {
-        println(ChargeMessage.PAGE_SEPARATOR)
+        printDivLine()
         println(ChargeMessage.CHARGE_PAGE_TITLE)
 
         while (true) {
@@ -18,7 +20,7 @@ class ChargePage(
 
             val input = InputView.getStringInput(ChargeMessage.CHARGE_INPUT_PROMPT)
 
-            if (input == ChargeMessage.ZERO) {
+            if (input == CommonConstants.USER_INPUT_ZERO) {
                 println(ChargeMessage.GOING_BACK)
                 break
             }
@@ -35,7 +37,7 @@ class ChargePage(
                     continue
                 }
                 ChargeValidationResult.Valid -> {
-                    println("💰 충전 중...")
+                    println(ChargeMessage.CHARGING)
                     chargeManager.charge(user, amount)
                     println(ChargeMessage.CHARGE_COMPLETE.format(amount))
                     println(ChargeMessage.CURRENT_BALANCE.format(user.balance))
