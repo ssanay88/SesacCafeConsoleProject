@@ -1,6 +1,8 @@
 package view.mypage
 
+import common.CommonConstants
 import common.InputView
+import common.OutputView.printDivLine
 import view.charge.ChargePage
 import common.UserData
 import view.orderhistory.OrderHistoryPage
@@ -16,7 +18,7 @@ class MyPage {
 
     fun startMyPage(userData: UserData) {
         while (true) {
-            println(MyPageMessage.PAGE_SEPARATOR)
+            printDivLine()
             println(MyPageMessage.PAGE_TITLE)
             println(MyPageMessage.MENU_CHARGE)
             println(MyPageMessage.MENU_USER_INFO)
@@ -27,11 +29,11 @@ class MyPage {
             val input = InputView.getStringInput(MyPageMessage.INPUT_PROMPT)
 
             when (input) {
-                "1" -> chargePage.startChargePage(userData)
-                "2" -> userInfoPage.startViewUserInfo(userData)
-                "3" -> orderHistoryPage.startOrderHistoryPage(userData)
-                "4" -> changePasswordPage.startChangePasswordPage(userData)
-                "0" -> {
+                CommonConstants.USER_INPUT_ONE  -> chargePage.startChargePage(userData)
+                CommonConstants.USER_INPUT_TWO-> userInfoPage.startViewUserInfo(userData)
+                CommonConstants.USER_INPUT_THREE -> orderHistoryPage.startOrderHistoryPage(userData)
+                CommonConstants.USER_INPUT_FOUR -> changePasswordPage.startChangePasswordPage(userData)
+                CommonConstants.USER_INPUT_ZERO -> {
                     println(MyPageMessage.GOING_BACK)
                     return
                 }

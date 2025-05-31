@@ -1,6 +1,8 @@
 package view.password
 
+import common.CommonConstants
 import common.InputView
+import common.OutputView.printDivLine
 import common.UserData
 import viewmodel.password.ChangePasswordManager
 
@@ -8,6 +10,7 @@ class ChangePasswordPage(
     private val changePasswordManager: ChangePasswordManager = ChangePasswordManager()
 ) {
     fun startChangePasswordPage(user: UserData) {
+        printDivLine()
         println(ChangePasswordMessage.PAGE_TITLE)
 
         if (!checkCurrentPassword(user)) return
@@ -22,13 +25,12 @@ class ChangePasswordPage(
 
     private fun checkCurrentPassword(user: UserData): Boolean {
         while (true) {
-            println()
             println(ChangePasswordMessage.INPUT_CURRENT)
             println(ChangePasswordMessage.INPUT_ZERO_BACK)
 
             val input = InputView.getStringInput(ChangePasswordMessage.CURRENT_PROMPT)
 
-            if (input == "0") {
+            if (input == CommonConstants.USER_INPUT_ZERO) {
                 println(ChangePasswordMessage.GOING_BACK)
                 return false
             }
@@ -49,12 +51,12 @@ class ChangePasswordPage(
 
             val input = InputView.getStringInput(ChangePasswordMessage.NEW_PROMPT)
 
-            if (input == "0") {
+            if (input == CommonConstants.USER_INPUT_ZERO) {
                 println(ChangePasswordMessage.GOING_BACK)
                 return null
             }
 
-            if (input.length < 4) {
+            if (input.length < CommonConstants.MIN_PW_LENGTH) {
                 println(ChangePasswordMessage.NEW_TOO_SHORT)
                 continue
             }

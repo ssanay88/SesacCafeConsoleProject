@@ -1,11 +1,13 @@
 package view.orderhistory
 
+import common.CommonConstants
+import common.OutputView.printDivLine
 import common.UserData
 
 class OrderHistoryPage {
 
     fun startOrderHistoryPage(user: UserData) {
-        println(OrderHistoryMessage.PAGE_SEPARATOR)
+        printDivLine()
         println(OrderHistoryMessage.ORDER_HISTORY_PAGE_TITLE)
 
         if (user.orderHistory.isEmpty()) {
@@ -21,7 +23,7 @@ class OrderHistoryPage {
                 println("${it.menuName} x ${it.quantity}")
             }
             if (user.orderHistory.size > 1 && index != user.orderHistory.lastIndex) {
-                println(OrderHistoryMessage.ORDER_SEPARATOR)
+                println(CommonConstants.DIV_LINE)
             }
         }
     }
