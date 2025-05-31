@@ -1,6 +1,6 @@
 package view.userinfo
 
-import common.UserData
+import model.UserData
 
 class UserInfoPage {
     fun startViewUserInfo(user: UserData) {

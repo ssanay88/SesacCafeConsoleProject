@@ -1,6 +1,6 @@
 package view.cart
 
-import common.UserData
+import model.UserData
 import view.order.OrderPage
 import viewmodel.cart.CartManager
 

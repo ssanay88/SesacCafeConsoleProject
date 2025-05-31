@@ -1,6 +1,6 @@
 package model.charge
 
-import common.UserData
+import model.UserData
 import common.UserDBManager
 
 class ChargeRepository {

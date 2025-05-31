@@ -1,7 +1,7 @@
 package view.password
 
 import common.InputView
-import common.UserData
+import model.UserData
 import viewmodel.password.ChangePasswordManager
 
 class ChangePasswordPage(

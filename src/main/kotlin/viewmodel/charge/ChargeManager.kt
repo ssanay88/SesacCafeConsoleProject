@@ -1,6 +1,6 @@
 package viewmodel.charge
 
-import common.UserData
+import model.UserData
 import model.charge.ChargeValidationResult
 
 class ChargeManager(

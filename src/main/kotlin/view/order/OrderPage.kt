@@ -1,7 +1,7 @@
 package view.order
 
 import model.cart.CartItem
-import common.UserData
+import model.UserData
 import model.order.Order
 import model.order.OrderItem
 import view.charge.ChargePage

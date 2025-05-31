@@ -1,6 +1,6 @@
 package view.orderhistory
 
-import common.UserData
+import model.UserData
 
 class OrderHistoryPage {
 

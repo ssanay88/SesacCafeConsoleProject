@@ -1,6 +1,6 @@
 package viewmodel.password
 
-import common.UserData
+import model.UserData
 import model.password.ChangePasswordRepository
 
 class ChangePasswordUseCase(

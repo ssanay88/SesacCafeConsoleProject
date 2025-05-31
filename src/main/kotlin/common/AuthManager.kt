@@ -1,5 +1,6 @@
 package common
 
+import model.UserData
 import model.order.Order
 
 /**

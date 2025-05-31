@@ -2,7 +2,7 @@ package view.mypage
 
 import common.InputView
 import view.charge.ChargePage
-import common.UserData
+import model.UserData
 import view.orderhistory.OrderHistoryPage
 import view.password.ChangePasswordPage
 import view.userinfo.UserInfoPage

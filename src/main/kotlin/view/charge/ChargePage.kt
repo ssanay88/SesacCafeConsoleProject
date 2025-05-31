@@ -1,7 +1,7 @@
 package view.charge
 
 import common.InputView
-import common.UserData
+import model.UserData
 import model.charge.ChargeValidationResult
 import viewmodel.charge.ChargeManager
 

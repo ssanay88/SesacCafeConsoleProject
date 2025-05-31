@@ -3,7 +3,7 @@ package view.signup
 import common.CommonConstants
 import common.InputView
 import common.OutputView
-import common.UserData
+import model.UserData
 import model.InputResult
 import view.home.HomePage
 import viewmodel.login.LoginManager
