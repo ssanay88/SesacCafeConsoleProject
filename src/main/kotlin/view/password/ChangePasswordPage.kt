@@ -3,7 +3,6 @@ package view.password
 import common.CommonConstants
 import common.InputView
 import common.OutputView.printDivLine
-import common.UserData
 import model.UserData
 import viewmodel.password.ChangePasswordManager
 
