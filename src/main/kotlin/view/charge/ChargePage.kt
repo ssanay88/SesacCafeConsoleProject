@@ -4,6 +4,7 @@ import common.CommonConstants
 import common.InputView
 import common.OutputView.printDivLine
 import common.UserData
+import model.UserData
 import model.charge.ChargeValidationResult
 import viewmodel.charge.ChargeManager
 

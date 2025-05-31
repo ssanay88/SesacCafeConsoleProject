@@ -2,6 +2,7 @@ package view.userinfo
 
 import common.OutputView.printDivLine
 import common.UserData
+import model.UserData
 
 class UserInfoPage {
     fun startViewUserInfo(user: UserData) {

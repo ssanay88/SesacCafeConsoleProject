@@ -1,7 +1,7 @@
 package viewmodel.signup
 
 import common.UserDBManager
-import common.UserData
+import model.UserData
 
 class SignupManager {
 

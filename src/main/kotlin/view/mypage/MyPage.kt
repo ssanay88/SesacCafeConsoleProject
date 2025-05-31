@@ -4,7 +4,7 @@ import common.CommonConstants
 import common.InputView
 import common.OutputView.printDivLine
 import view.charge.ChargePage
-import common.UserData
+import model.UserData
 import view.orderhistory.OrderHistoryPage
 import view.password.ChangePasswordPage
 import view.userinfo.UserInfoPage

@@ -1,7 +1,7 @@
 package viewmodel.login
 
 import common.AuthManager
-import common.UserData
+import model.UserData
 import common.UserDBManager
 
 class LoginManager {

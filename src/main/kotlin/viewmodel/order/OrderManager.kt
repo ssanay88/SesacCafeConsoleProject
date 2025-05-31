@@ -1,6 +1,6 @@
 package viewmodel.order
 
-import common.UserData
+import model.UserData
 import model.order.Order
 
 class OrderManager {

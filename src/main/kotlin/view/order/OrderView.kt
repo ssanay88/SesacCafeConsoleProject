@@ -1,6 +1,6 @@
 package view.order
 
-import common.UserData
+import model.UserData
 
 class OrderView {
     fun printOrderPageUI(totalAmount: Int, user: UserData) {

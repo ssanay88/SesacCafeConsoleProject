@@ -1,4 +1,4 @@
-package common
+package model
 
 import model.order.Order
 import java.io.Serializable

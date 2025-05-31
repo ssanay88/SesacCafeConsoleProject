@@ -1,6 +1,6 @@
 package viewmodel.password
 
-import common.UserData
+import model.UserData
 
 class ChangePasswordManager(
     private val useCase: ChangePasswordUseCase = ChangePasswordUseCase()

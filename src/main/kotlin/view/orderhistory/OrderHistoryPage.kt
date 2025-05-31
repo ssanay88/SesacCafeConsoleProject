@@ -3,6 +3,7 @@ package view.orderhistory
 import common.CommonConstants
 import common.OutputView.printDivLine
 import common.UserData
+import model.UserData
 
 class OrderHistoryPage {
 

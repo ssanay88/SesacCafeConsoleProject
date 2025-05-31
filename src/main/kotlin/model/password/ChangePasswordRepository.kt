@@ -1,6 +1,6 @@
 package model.password
 
-import common.UserData
+import model.UserData
 import common.UserDBManager
 
 class ChangePasswordRepository {

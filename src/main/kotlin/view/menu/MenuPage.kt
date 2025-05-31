@@ -2,7 +2,7 @@ package view.menu
 
 import model.cart.CartItem
 import view.cart.CartPage
-import common.UserData
+import model.UserData
 import view.ConsoleInput
 import view.order.OrderPage
 import viewmodel.cart.CartManager
