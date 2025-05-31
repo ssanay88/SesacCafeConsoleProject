@@ -23,4 +23,11 @@ object CommonConstants {
     const val FAIL_LOAD_FILE = "❌파일 불러오기 실패"
     const val SUCCESS_SAVE_FILE = "🟢파일 저장하기 성공"
     const val FAIL_SAVE_FILE = "❌파일 저장하기 실패"
+
+    //input number
+    const val USER_INPUT_ZERO = "0"
+    const val USER_INPUT_ONE = "1"
+    const val USER_INPUT_TWO = "2"
+    const val USER_INPUT_THREE = "3"
+    const val USER_INPUT_FOUR = "4"
 }

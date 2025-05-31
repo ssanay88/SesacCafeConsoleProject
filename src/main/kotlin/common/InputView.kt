@@ -10,7 +10,7 @@ object InputView {
 
     fun getStringInput(text: String): String {
         print(text)
-        return readlnOrNull()?.trim() ?: ""
+        return ConsoleInput.consoleReadLine().trim()
     }
 
     fun getIntInput(text: String): Int? {
