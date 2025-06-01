@@ -7,7 +7,7 @@ class MenuView {
     }
 
     fun printMenuItem(index: Int, name: String, price: Int) {
-        println("${index + 1}. $name (${price}원)")
+        println("(${index + 1}) $name (${price}원)")
     }
 
     fun printMenuSelectionUI() {
@@ -31,18 +31,18 @@ class MenuView {
     }
 
     fun printOrderOptions() {
-        println("1. 장바구니에 담기")
-        println("2. 주문하기")
+        println("(1) 장바구니에 담기")
+        println("(2) 주문하기")
         print("입력: ")
     }
 
     fun printAddedToCartMessage(menuName: String, quantity: Int) {
-        println("\n{$menuName} ${quantity}개를 장바구니에 담았습니다.\n")
+        println("\n[$menuName] ${quantity}개를 장바구니에 담았습니다.\n")
     }
 
     fun printAfterAddOptions() {
-        println("1. 장바구니로 이동하기")
-        println("2. 메뉴 페이지로 돌아가기")
+        println("(1) 장바구니로 이동하기")
+        println("(2) 메뉴 페이지로 돌아가기")
         print("입력: ")
     }
 

@@ -7,3 +7,6 @@ enum class Menu(val menuName: String, val price: Int) {
     Mocha("카페모카", 5700),
     Cappuccino("카푸치노", 5200)
 }
+
+
+

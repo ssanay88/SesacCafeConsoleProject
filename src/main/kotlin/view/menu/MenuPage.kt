@@ -1,5 +1,6 @@
 package view.menu
 
+import common.Input
 import model.cart.CartItem
 import view.cart.CartPage
 import model.UserData
@@ -13,6 +14,7 @@ class MenuPage {
 
     fun startMenuPage(user: UserData) {
 
+        Input.printDivLine()
         menuView.printMenuPageUI()
 
         Menu.values().forEachIndexed { index, menu ->
