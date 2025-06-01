@@ -1,5 +1,6 @@
 package view.order
 
+import common.OutputView
 import model.cart.CartItem
 import model.UserData
 import model.order.Order
@@ -16,7 +17,9 @@ class OrderPage {
 
     fun startOrderPage(user: UserData, items: List<CartItem>) {
         if (items.isEmpty()) {
+            OutputView.printDivLine()
             orderView.printEmptyCartMessage()
+            OutputView.printDivLine()
             return
         }
 
@@ -37,7 +40,7 @@ class OrderPage {
                 }
             }
 
-            // [주문 페이지]
+            OutputView.printDivLine()
             orderView.printOrderPageUI(amountToPay, user)
 
             // 잔액 부족 시 충전 페이지 이동 후 다시 반복
@@ -67,7 +70,9 @@ class OrderPage {
                 addStamp(user)
             }
 
+            OutputView.printDivSubLine()
             orderView.printOrderCompleteMessage(amountToPay, user)
+            OutputView.printDivLine()
             return
         }
     }

@@ -6,4 +6,8 @@ object OutputView {
         println(CommonConstants.DIV_LINE)
     }
 
+    fun printDivSubLine() {
+        println(CommonConstants.DIV_SUB_LINE)
+    }
+
 }
