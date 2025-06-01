@@ -1,5 +1,6 @@
 package view.menu
 
+import common.OutputView
 import model.cart.CartItem
 import view.cart.CartPage
 import model.UserData
@@ -13,12 +14,14 @@ class MenuPage {
 
     fun startMenuPage(user: UserData) {
 
+        OutputView.printDivLine()
         menuView.printMenuPageUI()
 
         Menu.values().forEachIndexed { index, menu ->
             menuView.printMenuItem(index, menu.menuName, menu.price)
         }
 
+        OutputView.printDivSubLine()
         menuView.printMenuSelectionUI()
 
         val choice = ConsoleInput.consoleReadLine().toInt()
@@ -31,6 +34,7 @@ class MenuPage {
 
         var quantity: Int = 0
         while (true) {
+            OutputView.printDivSubLine()
             menuView.printQuantityInputUI(selectedMenu.menuName)
             val input = ConsoleInput.consoleReadLine().toInt()
 
@@ -42,16 +46,20 @@ class MenuPage {
             }
         }
         with(menuView){
+            OutputView.printDivSubLine()
             printSelectedMenuMessage(selectedMenu.menuName, quantity)
+            OutputView.printDivLine()
             printOrderOptions()
         }
 
         when (ConsoleInput.consoleReadLine()) {
             "1" -> {
                 CartManager.addItem(user.id, CartItem(selectedMenu, quantity))
+                OutputView.printDivSubLine()
                 menuView.printAddedToCartMessage(selectedMenu.menuName, quantity)
 
                 while (true) {
+                    OutputView.printDivLine()
                     menuView.printAfterAddOptions()
                     when (ConsoleInput.consoleReadLine()) {
                         "1" -> {

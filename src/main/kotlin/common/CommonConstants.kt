@@ -19,6 +19,7 @@ object CommonConstants {
     const val ERROR_INPUT_PW_LENGTH = "❌에러 : PW는 4자리 이상이여야 합니다. PW 재입력 (뒤로 가기 - 0번 입력) : "
 
     const val DIV_LINE = "===================================================="
+    const val DIV_SUB_LINE = "----------------------------------------------"
     const val SUCCESS_LOAD_FILE = "🟢파일 불러오기 성공"
     const val FAIL_LOAD_FILE = "❌파일 불러오기 실패"
     const val SUCCESS_SAVE_FILE = "🟢파일 저장하기 성공"
