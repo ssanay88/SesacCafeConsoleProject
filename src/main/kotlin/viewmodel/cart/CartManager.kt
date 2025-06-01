@@ -8,7 +8,6 @@ object CartManager {
 
     private val userCart = mutableMapOf<String, MutableList<CartItem>>()
 
-    // 추가
     fun addItem(userId: String, item: CartItem) {
         val cart = userCart.getOrPut(userId) { mutableListOf() }
         val existing = cart.find {
@@ -23,7 +22,6 @@ object CartManager {
         }
     }
 
-    // 수량 변경
     fun updateQuantity(userId: String, menu: Menu, newQuantity: Int) {
         val cart = userCart[userId] ?: return
         val index = cart.indexOfFirst { it.menu == menu }
@@ -33,12 +31,10 @@ object CartManager {
         }
     }
 
-    // 아이템 삭제
     fun removeItem(userId: String, menu: Menu) {
         userCart[userId]?.removeIf { it.menu == menu }
     }
 
-    // 전체 삭제
     fun clear(userId: String) {
         userCart[userId]?.clear()
     }
