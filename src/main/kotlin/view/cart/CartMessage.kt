@@ -13,7 +13,6 @@ object CartMessage {
         (0) 이전 화면으로 돌아가기
         원하시는 기능을 선택해주세요 : 
     """
-
     const val GOING_BACK = "이전 화면으로 돌아갑니다."
     const val ORDER_COMPLETE = "주문이 완료되었습니다."
     const val QUANTITY_CHANGE_GUIDE = "수량을 변경할 메뉴 번호를 입력해주세요: "
