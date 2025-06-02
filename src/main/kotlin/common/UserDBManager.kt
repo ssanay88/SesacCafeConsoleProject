@@ -17,38 +17,33 @@ import java.io.ObjectOutputStream
 object UserDBManager {
 
     const val USER_DB_PATH = "userFile/userDB.ser"
+
     private val userDBFile = File(USER_DB_PATH)
     private val usersInMemory: MutableList<UserData> = mutableListOf()
 
     suspend fun loadUsersFromFile() {
         withContext(Dispatchers.IO) {
             runCatching {
-                if (!userDBFile.exists()) {
-                    userDBFile.createNewFile()
-                    ObjectOutputStream(FileOutputStream(USER_DB_PATH)).use {
-                        it.writeObject(mutableListOf<UserData>())
-                    }
-                    usersInMemory.clear()
-                }
-
-                if (userDBFile.length() == 0L) {
-                    userDBFile.createNewFile()
-                    ObjectOutputStream(FileOutputStream(USER_DB_PATH)).use {
-                        it.writeObject(mutableListOf<UserData>())
-                    }
-                    usersInMemory.clear()
-                }
+                // 파일이 존재하지 않거나 빈 경우 파일 생성 빈 배열을 담은 파일 생성
+                if (!userDBFile.exists() || userDBFile.length() == 0L) createEmptyFile()
 
                 ObjectInputStream(FileInputStream(USER_DB_PATH)).use {
                     usersInMemory.addAll(it.readObject() as List<UserData>)
                 }
-
             }.onSuccess {
                 // println(CommonConstants.SUCCESS_LOAD_FILE)
             }.onFailure {
                 // println(CommonConstants.FAIL_LOAD_FILE)
             }
         }
+    }
+
+    private fun createEmptyFile() {
+        userDBFile.createNewFile()
+        ObjectOutputStream(FileOutputStream(USER_DB_PATH)).use {
+            it.writeObject(mutableListOf<UserData>())
+        }
+        usersInMemory.clear()
     }
 
     suspend fun saveChangesToFile() {
