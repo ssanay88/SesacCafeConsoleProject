@@ -72,9 +72,9 @@ object InputView {
         val input = ConsoleInput.consoleReadLine().trim()
         return when {
             input == CommonConstants.GO_BACK_INPUT -> InputResult.GoBack(CommonConstants.GO_BACK_INPUT)
-            input.isEmpty() -> InputResult.InputIsEmpty(CommonConstants.ERROR_INPUT_ID_IS_EMPTY)
-            input.contains(" ") -> InputResult.InputContainsEmpty(CommonConstants.ERROR_INPUT_ID_CONTAINS_EMPTY)
-            input.length < CommonConstants.MIN_PW_LENGTH -> InputResult.InputIsShort(CommonConstants.ERROR_INPUT_ID_LENGTH)
+            input.isEmpty() -> InputResult.InputIsEmpty(CommonConstants.ERROR_INPUT_PW_IS_EMPTY)
+            input.contains(" ") -> InputResult.InputContainsEmpty(CommonConstants.ERROR_INPUT_PW_CONTAINS_EMPTY)
+            input.length < CommonConstants.MIN_PW_LENGTH -> InputResult.InputIsShort(CommonConstants.ERROR_INPUT_PW_LENGTH)
             else -> InputResult.Success(input)
         }
     }
