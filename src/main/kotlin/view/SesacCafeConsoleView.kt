@@ -19,6 +19,7 @@ object SesacCafeConsoleView {
     private const val END_PG_MESSAGE = " 👋 새싹 카페 프로그램 종료합니다. 감사합니다. 👋 "
 
     init {
+        // 프로그램 실행 시 파일에 저장된 데이터를 비동기로 로딩합니다.
         CoroutineScope(Dispatchers.IO).launch {
             UserDBManager.loadUsersFromFile()
         }

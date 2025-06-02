@@ -18,25 +18,28 @@ class LoginPage {
         // 로그인 시작 텍스트 출력
         print(LoginMessage.ENTER_ID.trimIndent())
 
-        var inputUserId = checkIdInputResult()
+        var inputUserId = checkInputResult { InputView.getUserIdInput() }
         if (inputUserId == CommonConstants.GO_BACK_INPUT) return
 
         // ID 입력 및 확인
         while (!loginManager.isUserIdExists(inputUserId)) {
             print(LoginMessage.ID_NOT_EXIST)
-            inputUserId = checkIdInputResult()
+            inputUserId = checkInputResult { InputView.getUserIdInput() }
             if (inputUserId == CommonConstants.GO_BACK_INPUT) return
         }
+
+        // DB에서 입력한 ID와 일치하는 회원의 정보
         val loginUserData = UserDBManager.findUserDataById(inputUserId)
 
         // 비밀번호 입력 및 확인
         print(LoginMessage.ENTER_PW)
-        var inputUserPw = InputView.getUserPwInput()
-        if (inputUserPw.equals(CommonConstants.GO_BACK_INPUT)) return
+        var inputUserPw = checkInputResult { InputView.getUserPwInput() }
+        if (inputUserPw == CommonConstants.GO_BACK_INPUT) return
+
         while (loginUserData?.password != inputUserPw) {
             print(LoginMessage.PW_NOT_CORRECT)
-            inputUserPw = InputView.getUserPwInput()
-            if (inputUserPw.equals(CommonConstants.GO_BACK_INPUT)) return
+            inputUserPw = checkInputResult { InputView.getUserPwInput() }
+            if (inputUserPw == CommonConstants.GO_BACK_INPUT) return
         }
 
         // 로그인 정보 저장
@@ -46,9 +49,9 @@ class LoginPage {
         homePage.startHomePage()
     }
 
-    fun checkIdInputResult(): String {
+    private fun checkInputResult(getUserInputFun: () -> InputResult): String {
         while (true) {
-            when (val inputUserResult = InputView.getUserIdInput()) {
+            when (val inputUserResult = getUserInputFun()) {
                 is InputResult.Success -> {
                     return inputUserResult.input
                 }

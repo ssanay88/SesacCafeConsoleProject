@@ -55,6 +55,7 @@ object InputView {
         return input
     }
 
+    // ID 입력 시 유효성 검사
     fun getUserIdInput(): InputResult {
         val input = ConsoleInput.consoleReadLine().trim()
         return when {
@@ -66,29 +67,16 @@ object InputView {
         }
     }
 
-    fun getUserPwInput(): String {
-        var input = readln()
-        while (true) {
-            when {
-                input == CommonConstants.GO_BACK_INPUT -> {
-                    break
-                }
-                input.isEmpty() -> {
-                    print(CommonConstants.ERROR_INPUT_PW_IS_EMPTY)
-                    input = readln()
-                }
-                input.contains(" ") -> {
-                    print(CommonConstants.ERROR_INPUT_PW_CONTAINS_EMPTY)
-                    input = readln()
-                }
-                input.length < CommonConstants.MIN_PW_LENGTH -> {
-                    print(CommonConstants.ERROR_INPUT_PW_LENGTH)
-                    input = readln()
-                }
-                else -> break
-            }
+    // PW 입력 시 유효성 검사
+    fun getUserPwInput(): InputResult {
+        val input = ConsoleInput.consoleReadLine().trim()
+        return when {
+            input == CommonConstants.GO_BACK_INPUT -> InputResult.GoBack(CommonConstants.GO_BACK_INPUT)
+            input.isEmpty() -> InputResult.InputIsEmpty(CommonConstants.ERROR_INPUT_ID_IS_EMPTY)
+            input.contains(" ") -> InputResult.InputContainsEmpty(CommonConstants.ERROR_INPUT_ID_CONTAINS_EMPTY)
+            input.length < CommonConstants.MIN_PW_LENGTH -> InputResult.InputIsShort(CommonConstants.ERROR_INPUT_ID_LENGTH)
+            else -> InputResult.Success(input)
         }
-        return input
     }
 
 }
